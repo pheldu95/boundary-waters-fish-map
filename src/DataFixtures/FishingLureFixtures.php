@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\EntryPoint;
 use App\Entity\FishingLure;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
