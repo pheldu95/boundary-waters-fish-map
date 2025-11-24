@@ -12,7 +12,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://php',
+        target: 'https://localhost', //any request made to '/api will' be forwarded to localhost/api
         changeOrigin: true,
         secure: false,
       }
