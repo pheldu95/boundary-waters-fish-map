@@ -66,9 +66,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: CaughtFish::class, mappedBy: 'caughtBy', orphanRemoval: true)]
     private Collection $caughtFish;
 
+    /**
+     * @var Collection<int, FishingLure>
+     */
+    #[ORM\OneToMany(targetEntity: FishingLure::class, mappedBy: 'addedBy')]
+    private Collection $fishingLures;
+
     public function __construct()
     {
         $this->caughtFish = new ArrayCollection();
+        $this->fishingLures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +186,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($caughtFish->getCaughtBy() === $this) {
                 $caughtFish->setCaughtBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FishingLure>
+     */
+    public function getFishingLures(): Collection
+    {
+        return $this->fishingLures;
+    }
+
+    public function addFishingLure(FishingLure $fishingLure): static
+    {
+        if (!$this->fishingLures->contains($fishingLure)) {
+            $this->fishingLures->add($fishingLure);
+            $fishingLure->setAddedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFishingLure(FishingLure $fishingLure): static
+    {
+        if ($this->fishingLures->removeElement($fishingLure)) {
+            // set the owning side to null (unless already changed)
+            if ($fishingLure->getAddedBy() === $this) {
+                $fishingLure->setAddedBy(null);
             }
         }
 
