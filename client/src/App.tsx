@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import type { FishSpecies } from './lib/types';
+import NavBar from './components/NavBar';
 
 function App() {
   const [fishSpecies, setFishSpecies] = useState<FishSpecies[]>([]);
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <NavBar />
       <h1 className="text-3xl font-bold text-blue-600 bg-yellow-200 p-4 rounded-lg">Boundary Waters Fish Map</h1>
       <ul>
         {fishSpecies.map((species) => (
