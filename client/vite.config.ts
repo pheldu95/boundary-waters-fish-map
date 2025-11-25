@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -12,7 +11,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://localhost', //any request made to '/api will' be forwarded to localhost/api
+        target: 'http://php', // Use the service name from docker-compose.yml
         changeOrigin: true,
         secure: false,
       }
