@@ -17,8 +17,8 @@ export default function CaughtFishTable() {
     return (
         <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden w-3/4 mx-auto mt-16">
             <table className="w-full text-sm leading-5">
-                <thead className="bg-neutral-secondary-soft border-b border-default bg-gray-100">
-                    <tr>
+                <thead className="bg-neutral-secondary-soft bg-gray-100">
+                    <tr className="border-b border-gray-200">
                         {headerText.map((text) => (
                             <TableHeader key={text} text={text} />
                         ))}
@@ -26,7 +26,10 @@ export default function CaughtFishTable() {
                 </thead>
                 <tbody>
                     {caughtFish.map((fish) => (
-                        <tr className="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+                        <tr
+                            key={fish.id}
+                            className="even:bg-gray-50 odd:bg-white border-b border-gray-200"
+                        >
                             <TableData text={fish.fishSpecies.name} />
                             <TableData text={fish.length?.toString() ?? 'N/A'} />
                             <TableData text={fish.caughtDate} />
