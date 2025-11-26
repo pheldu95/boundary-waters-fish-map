@@ -23,6 +23,7 @@ class CaughtFishFixtures extends Fixture implements DependentFixtureInterface
                 'caughtBy' => $users[array_rand($users)],
                 'fishingLure' => $lures[array_rand($lures)],
                 'fishSpecies' => $species[array_rand($species)],
+                'length' => rand(10, 100) / 10,
             ];
         });
     }

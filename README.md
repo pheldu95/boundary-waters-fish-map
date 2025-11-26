@@ -11,3 +11,5 @@
 https://github.com/dunglas/symfony-docker
 
 # boundary_waters_fish_map
+
+- Access db in database docker container: psql -U POSTGRES_USER -d POSTGRES_DB (replace with your user and db)

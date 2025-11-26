@@ -11,8 +11,9 @@ type CaughtFish = {
   longitude: string
   caughtDate: string
   caughtBy: string
-  fishSpecies: string
-  fishingLure: string
+  fishSpecies: FishSpecies
+  fishingLure: FishingLure
+  length: number | null
 };
 
 type FishingLure = {

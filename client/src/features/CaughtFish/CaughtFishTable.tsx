@@ -27,10 +27,10 @@ export default function CaughtFishTable() {
                 <tbody>
                     {caughtFish.map((fish) => (
                         <tr className="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default">
+                            <TableData text={fish.fishSpecies.name} />
+                            <TableData text={fish.length?.toString() ?? 'N/A'} />
                             <TableData text={fish.caughtDate} />
-                            <TableData text={fish.fishSpecies} />
-                            <TableData text={fish.latitude} />
-                            <TableData text={fish.fishingLure} />
+                            <TableData text={fish.fishingLure.name} />
                         </tr>
                     ))}
                 </tbody>

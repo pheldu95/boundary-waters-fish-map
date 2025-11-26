@@ -6,9 +6,13 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CaughtFishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CaughtFishRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['caughtFish:read']],
+    denormalizationContext: ['groups' => ['caughtFish:write']]
+)]
 class CaughtFish
 {
     #[ORM\Id]
@@ -17,25 +21,32 @@ class CaughtFish
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 15, scale: 13)]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 16, scale: 13)]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?string $longitude = null;
 
     #[ORM\Column]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?\DateTimeImmutable $caughtDate = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?float $length = null;
 
     #[ORM\ManyToOne(inversedBy: 'caughtFish')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?User $caughtBy = null;
 
     #[ORM\ManyToOne(inversedBy: 'caughtFish')]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?FishSpecies $fishSpecies = null;
 
     #[ORM\ManyToOne(inversedBy: 'caughtFish')]
+    #[Groups(['caughtFish:read', 'caughtFish:write'])]
     private ?FishingLure $fishingLure = null;
 
     public function getId(): ?int
