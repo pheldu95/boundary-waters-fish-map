@@ -4,17 +4,14 @@ import type { CaughtFish } from "../../lib/types";
 import TableData from "../../components/tables/TableData/TableData";
 import DeleteButton from "../../components/buttons/DeleteButton";
 import DefaultButton from "../../components/buttons/DefaultButton";
+import { useCaughtFish } from "../../lib/hooks/useCaughtFish";
 
 export default function CaughtFishTable() {
     const headerText = ["Species", "Length (inches)", "Date Caught", "Lure Used", "Actions"];
-    const [caughtFish, setCaughtFish] = useState<CaughtFish[]>([]);
 
-    useEffect(() => {
-        fetch('/api/caught_fishes')
-            .then(response => response.json())
-            .then(data => setCaughtFish(data.member))
-            .catch(error => console.error('Error fetching fish species:', error));
-    }, []);
+    const { caughtFishes, isLoading } = useCaughtFish();
+
+    if (!caughtFishes || isLoading) return <p>Loading...</p>;
 
     return (
         <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden w-3/4 mx-auto mt-16">
@@ -27,7 +24,7 @@ export default function CaughtFishTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {caughtFish.map((fish) => (
+                    {caughtFishes.map((fish) => (
                         <tr
                             key={fish.id}
                             className="even:bg-gray-50 odd:bg-white border-b border-gray-200"
@@ -38,7 +35,7 @@ export default function CaughtFishTable() {
                             <TableData>{fish.fishingLure.name}</TableData>
                             <TableData>
                                 <div className="flex gap-4">
-                                    <DefaultButton text={'View Details'}/>
+                                    <DefaultButton text={'View Details'} />
                                     <DeleteButton />
                                 </div>
                             </TableData>
