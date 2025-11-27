@@ -3,6 +3,7 @@ import TableData from "../../components/tables/TableData/TableData";
 import DefaultButton from "../../components/buttons/DefaultButton";
 import { useCaughtFish } from "../../lib/hooks/useCaughtFish";
 import TrashCanButton from "../../components/buttons/TrashCanButton";
+import ViewDetailsButton from "../../components/buttons/ViewDetailsButton";
 
 export default function CaughtFishTable() {
     const headerText = ["Species", "Length (inches)", "Date Caught", "Lure Used", "Actions"];
@@ -33,7 +34,7 @@ export default function CaughtFishTable() {
                             <TableData>{fish.fishingLure.name}</TableData>
                             <TableData>
                                 <div className="flex gap-4">
-                                    <DefaultButton text={'View Details'} />
+                                    <ViewDetailsButton />
                                     <TrashCanButton itemId={fish.id} deleteMutation={deleteCaughtFish} />
                                 </div>
                             </TableData>
