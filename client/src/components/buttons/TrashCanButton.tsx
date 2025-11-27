@@ -13,12 +13,12 @@ export default function TrashCanButton<TArgs, TError = Error>({
     return (
         <div className="relative group inline-block">
             <button
-                disabled={isDeleting}
+                // disabled={isDeleting}
                 onClick={() => deleteMutation.mutate(itemId)}
                 className="focus:outline-none disabled:opacity-50 flex items-center justify-center cursor-pointer"
             >
                 {isDeleting ?
-                    <div className="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-pinkish" />
+                    <div className="border-transparent h-10 w-10 animate-spin rounded-full border-8 border-t-redish" />
                     : <i className="fas fa-trash text-xl w-10"></i>
                 }
             </button>
