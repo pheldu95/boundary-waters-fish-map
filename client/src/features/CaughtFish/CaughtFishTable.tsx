@@ -34,7 +34,7 @@ export default function CaughtFishTable() {
                             <TableData>
                                 <div className="flex gap-4">
                                     <DefaultButton text={'View Details'} />
-                                    {/* <DeleteButton itemId={fish.id} deleteMutation={deleteCaughtFish}/> */}
+                                    <DeleteButton itemId={fish.id} deleteMutation={deleteCaughtFish} isLoading={isLoading}/>
                                 </div>
                             </TableData>
                         </tr>
