@@ -5,4 +5,10 @@
   --color-browngreen: rgb(87 119 29);
   --color-bone: rgb(244 244 184);
   --color-foresty: rgb(49 142 19);
+
+  /* more colors */
+  --color-redish: rgb(232 24 0);
+  --color-yellowbone: rgb(255 244 158);
+  --color-brownt: rgb(195 165 91);
+  --color-fishblue: rgb(65 119 119);
 }
