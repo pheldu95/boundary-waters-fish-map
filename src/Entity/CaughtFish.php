@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CaughtFishRepository;
 use Doctrine\DBAL\Types\Types;
@@ -11,8 +14,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CaughtFishRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['caughtFish:read']],
-    denormalizationContext: ['groups' => ['caughtFish:write']]
+    denormalizationContext: ['groups' => ['caughtFish:write']],
 )]
+#[ApiFilter(SearchFilter::class, properties: ['fishSpecies.name' => 'exact', 'fishingLure.name' => 'exact',])]
+#[ApiFilter(DateFilter::class, properties: ['caughtDate'])]
 class CaughtFish
 {
     #[ORM\Id]
