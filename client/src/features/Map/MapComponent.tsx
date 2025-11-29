@@ -4,8 +4,8 @@ export default function MapComponent() {
     return (
         <MapContainer 
             center={[48.0, -91.0]} 
-            zoom={13} 
-            scrollWheelZoom={false} 
+            zoom={10} 
+            scrollWheelZoom={true} 
             style={{ height: "400px", width: "80%" }}
             className='mx-auto my-4 rounded-lg shadow-lg '
         >
