@@ -2,7 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import { DivIcon } from 'leaflet'
 import { useCampsite } from '../../lib/hooks/useCampsite';
-import LocationMarker from '../../components/LocationMarker';
+import LocationMarker from './LocationMarker';
 
 export default function MapComponent() {
     const { campsites, isPending } = useCampsite();

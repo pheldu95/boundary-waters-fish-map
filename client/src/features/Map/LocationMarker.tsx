@@ -1,15 +1,17 @@
-import type { Marker as LeafletMarker} from 'leaflet';
+import type { Marker as LeafletMarker } from 'leaflet';
 import { useEffect, useRef, useState } from 'react'
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
 
 export default function LocationMarker() {
     const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
-
     const markerRef = useRef<LeafletMarker | null>(null);
 
     useEffect(() => {
         if (position.latitude !== 0 && position.longitude !== 0 && markerRef.current) {
-            markerRef.current.openPopup();
+            //Wait for marker to be fully rendered before opening popup
+            setTimeout(() => {
+                markerRef.current?.openPopup();
+            }, 0);
         }
     }, [position]);
 
