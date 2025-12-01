@@ -47,23 +47,24 @@ export default function MapComponent({ addingCaughtFish }: Props) {
             style={{ height: "600px", width: "80%" }}
             className='mx-auto my-4 rounded-lg shadow-lg'
         >
-            {/* <TileLayer
+            <TileLayer
                 attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
                 url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-                maxZoom={17}
-            /> */}
-            <TileLayer
+                maxNativeZoom={17} // This tile layer goes up to zoom level 16
+                maxZoom={20} // Allow zooming in further. Makes map blurry though
+            />
+            {/* <TileLayer
                 attribution='Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
                 url="https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"
                 maxNativeZoom={16} // This tile layer goes up to zoom level 16
                 maxZoom={20} // Allow zooming in further. Makes map blurry though
-            />
+            /> */}
             {/* <Marker position={[48.0, -91.0]}>
                 <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker> */}
-            <MarkerClusterGroup
+            {/* <MarkerClusterGroup
                 chunkedLoading
                 // disableClusteringAtZoom={1}
                 showCoverageOnHover={false}
@@ -78,7 +79,7 @@ export default function MapComponent({ addingCaughtFish }: Props) {
                         <Popup>{campsite.url}</Popup>
                     </Marker>
                 ))}
-            </MarkerClusterGroup>
+            </MarkerClusterGroup> */}
             <MarkerClusterGroup
                 chunkedLoading
                 // disableClusteringAtZoom={1}
