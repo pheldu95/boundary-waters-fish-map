@@ -12,7 +12,7 @@ export default function MapPage() {
                 :
                 <DefaultButton onClickProps={() => setAddingCaughtFish(true)} text='Add a Caught Fish'/>
             }
-            <div className={addingCaughtFish ? 'map-container-crosshair' : ''}>
+            <div className={addingCaughtFish ? 'map-container-add-fish' : ''}>
                 <MapComponent addingCaughtFish={addingCaughtFish} />
             </div>
         </div>

@@ -1,3 +1,4 @@
-.map-container-crosshair .leaflet-container {
+.map-container-add-fish .leaflet-container {
     cursor: crosshair !important;
+    border: 5px rgb(49 142 19) solid;
 }
