@@ -24,9 +24,33 @@ export const useCaughtFish = (id?: number) => {
         }
     });
 
+    const updateCaughtFish = useMutation({
+        mutationFn: async (caughtFish: CaughtFish) => {
+            await axios.patch(`/api/caught_fishes/${caughtFish.id}`, caughtFish)
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ['caughtFishes']
+            })
+        }
+    });
+
+    const createCaughtFish = useMutation({
+        mutationFn: async (caughtFish: CaughtFish) => {
+            await axios.post(`/api/caught_fishes`, caughtFish)
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ['caughtFishes']
+            })
+        }
+    });
+
     return {
         caughtFishes,
         isLoading,
-        deleteCaughtFish
+        deleteCaughtFish,
+        updateCaughtFish,
+        createCaughtFish
     };
 }
