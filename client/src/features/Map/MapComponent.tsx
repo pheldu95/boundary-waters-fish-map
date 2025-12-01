@@ -29,8 +29,10 @@ export default function MapComponent() {
             className='mx-auto my-4 rounded-lg shadow-lg '
         >
             <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+                url="https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"
+                maxNativeZoom={16} // This tile layer goes up to zoom level 16
+                maxZoom={20} // Allow zooming in further. Makes map blurry though
             />
             {/* <Marker position={[48.0, -91.0]}>
                 <Popup>
