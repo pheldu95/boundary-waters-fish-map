@@ -28,6 +28,11 @@ export default function MapComponent() {
             style={{ height: "600px", width: "80%" }}
             className='mx-auto my-4 rounded-lg shadow-lg '
         >
+            {/* <TileLayer
+                attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+                url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+                maxZoom={17}
+            /> */}
             <TileLayer
                 attribution='Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
                 url="https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"
@@ -39,7 +44,12 @@ export default function MapComponent() {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker> */}
-            <MarkerClusterGroup chunkedLoading>
+            <MarkerClusterGroup
+                chunkedLoading
+                // disableClusteringAtZoom={1}
+                showCoverageOnHover={false}
+                spiderfyOnMaxZoom={false}
+            >
                 {campsites.map((campsite) => (
                     <Marker
                         key={campsite.id}
