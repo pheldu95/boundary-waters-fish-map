@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { CaughtFish } from "../types";
+import axios from "axios";
 
 export const useCaughtFish = (id?: number) => {
     const queryClient = useQueryClient();
@@ -7,12 +8,9 @@ export const useCaughtFish = (id?: number) => {
     const { data: caughtFishes, isLoading } = useQuery<CaughtFish[]>({
         queryKey: ['caughtFishes'],
         queryFn: async () => {
-            const response = await fetch('/api/caught_fishes')
-            if (!response.ok) {
-                throw new Error('Network response was not ok')
-            }
-
-            const result = await response.json();
+            const response = await axios.get('/api/caught_fishes');
+            
+            const result = response.data as { member: CaughtFish[] | null };
 
             return result.member ?? [];
         },
