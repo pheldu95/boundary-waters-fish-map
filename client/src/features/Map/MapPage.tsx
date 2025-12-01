@@ -6,8 +6,14 @@ export default function MapPage() {
     return (
         <div>
             <h1>Map Page</h1>
-            <button onClick={() => setAddingCaughtFish(true)}>Add a Caught Fish</button>
-            <MapComponent addingCaughtFish={addingCaughtFish} />
+            {addingCaughtFish ?
+                <button onClick={() => setAddingCaughtFish(false)}>Cancel</button>
+                :
+                <button onClick={() => setAddingCaughtFish(true)}>Add a Caught Fish</button>
+            }
+            <div className={addingCaughtFish ? 'map-container-crosshair' : ''}>
+                <MapComponent addingCaughtFish={addingCaughtFish} />
+            </div>
         </div>
     )
 }
