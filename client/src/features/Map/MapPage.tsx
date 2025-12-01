@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import MapComponent from './MapComponent'
+import DefaultButton from '../../components/buttons/DefaultButton';
 
 export default function MapPage() {
     const [addingCaughtFish, setAddingCaughtFish] = useState(false);
@@ -7,9 +8,9 @@ export default function MapPage() {
         <div>
             <h1>Map Page</h1>
             {addingCaughtFish ?
-                <button onClick={() => setAddingCaughtFish(false)}>Cancel</button>
+                <DefaultButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' />
                 :
-                <button onClick={() => setAddingCaughtFish(true)}>Add a Caught Fish</button>
+                <DefaultButton onClickProps={() => setAddingCaughtFish(true)} text='Add a Caught Fish'/>
             }
             <div className={addingCaughtFish ? 'map-container-crosshair' : ''}>
                 <MapComponent addingCaughtFish={addingCaughtFish} />

@@ -1,11 +1,13 @@
 interface DefaultButtonProps {
     text: string
+    onClickProps?: () => void
 }
 
-export default function DefaultButton({ text }: DefaultButtonProps) {
+export default function DefaultButton({ text, onClickProps }: DefaultButtonProps) {
     return (
         <button
             className="w-full text-gray-900 bg-foresty hover:bg-foresty-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 max-w-sm text-center cursor-pointer"
+            onClick={onClickProps}
         >
             {text}
         </button>
