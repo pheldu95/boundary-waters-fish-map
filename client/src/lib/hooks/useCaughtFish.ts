@@ -26,7 +26,11 @@ export const useCaughtFish = (id?: number) => {
 
     const updateCaughtFish = useMutation({
         mutationFn: async (caughtFish: CaughtFish) => {
-            await axios.patch(`/api/caught_fishes/${caughtFish.id}`, caughtFish)
+            await axios.patch(`/api/caught_fishes/${caughtFish.id}`, caughtFish, {
+                headers: {
+                    'Content-Type': 'application/ld+json'
+                }
+            })
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
@@ -37,7 +41,11 @@ export const useCaughtFish = (id?: number) => {
 
     const createCaughtFish = useMutation({
         mutationFn: async (caughtFish: CaughtFish) => {
-            await axios.post(`/api/caught_fishes`, caughtFish)
+            await axios.post(`/api/caught_fishes`, caughtFish, {
+                headers: {
+                    'Content-Type': 'application/ld+json'
+                }
+            })
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
