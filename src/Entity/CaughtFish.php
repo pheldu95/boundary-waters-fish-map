@@ -60,26 +60,26 @@ class CaughtFish
         return $this->id;
     }
 
-    public function getLatitude(): ?string
+    public function getLatitude(): ?float
     {
-        return $this->latitude;
+        return $this->latitude !== null ? (float) $this->latitude : null;
     }
 
-    public function setLatitude(string $latitude): static
+    public function setLatitude(?float $latitude): self
     {
-        $this->latitude = $latitude;
-
+        $this->latitude = $latitude !== null ? (string) $latitude : null;
+        
         return $this;
     }
 
-    public function getLongitude(): ?string
+    public function getLongitude(): ?float
     {
-        return $this->longitude;
+        return $this->longitude !== null ? (float) $this->longitude : null;
     }
 
     public function setLongitude(string $longitude): static
     {
-        $this->longitude = $longitude;
+        $this->longitude = $longitude !== null ? (string) $longitude : null;
 
         return $this;
     }

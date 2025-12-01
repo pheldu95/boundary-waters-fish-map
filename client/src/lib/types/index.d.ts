@@ -7,8 +7,8 @@ type FishSpecies = {
 
 type CaughtFish = {
   id: number
-  latitude: string
-  longitude: string
+  latitude: float
+  longitude: float
   caughtDate: string
   caughtBy: string
   fishSpecies: FishSpecies

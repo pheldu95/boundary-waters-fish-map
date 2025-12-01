@@ -88,7 +88,7 @@ export default function MapComponent({ addingCaughtFish }: Props) {
                 {caughtFishes.map((caughtFish) => (
                     <Marker
                         key={caughtFish.id}
-                        position={[parseFloat(caughtFish.latitude), parseFloat(caughtFish.longitude)]}
+                        position={[caughtFish.latitude, caughtFish.longitude]}
                         icon={fishIcon}
                     >
                         <Popup>{caughtFish.fishSpecies.name}</Popup>
