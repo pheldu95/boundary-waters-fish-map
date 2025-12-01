@@ -30,4 +30,31 @@ type User = {
     email: string
 }
 
-export type { FishSpecies, CaughtFish, FishingLure, User };
+type HydraCollection<T> {
+  '@context': string;
+  '@id': string;
+  '@type': string;
+  totalItems: number;
+  member: T[];
+  view?: {
+    '@id': string;
+    '@type': string;
+    first?: string;
+    last?: string;
+    next?: string;
+    previous?: string;
+  };
+  search?: {
+    '@type': string;
+    template: string;
+    variableRepresentation: string;
+    mapping: Array<{
+      '@type': string;
+      variable: string;
+      property: string;
+      required: boolean;
+    }>;
+  };
+}
+
+export type { FishSpecies, CaughtFish, FishingLure, User, HydraCollection };
