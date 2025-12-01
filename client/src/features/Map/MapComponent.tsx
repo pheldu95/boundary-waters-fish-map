@@ -2,6 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-cluster'
 import { DivIcon } from 'leaflet'
 import { useCampsite } from '../../lib/hooks/useCampsite';
+import LocationMarker from '../../components/LocationMarker';
 
 export default function MapComponent() {
     const { campsites, isPending } = useCampsite();
@@ -26,7 +27,7 @@ export default function MapComponent() {
             zoom={10}
             scrollWheelZoom={true}
             style={{ height: "600px", width: "80%" }}
-            className='mx-auto my-4 rounded-lg shadow-lg '
+            className='mx-auto my-4 rounded-lg shadow-lg'
         >
             {/* <TileLayer
                 attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
@@ -60,6 +61,7 @@ export default function MapComponent() {
                     </Marker>
                 ))}
             </MarkerClusterGroup>
+            <LocationMarker />
         </MapContainer>
     )
 }
