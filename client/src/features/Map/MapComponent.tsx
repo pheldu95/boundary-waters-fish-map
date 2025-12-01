@@ -25,7 +25,7 @@ export default function MapComponent() {
             center={[48.0, -91.0]}
             zoom={10}
             scrollWheelZoom={true}
-            style={{ height: "400px", width: "80%" }}
+            style={{ height: "600px", width: "80%" }}
             className='mx-auto my-4 rounded-lg shadow-lg '
         >
             <TileLayer
