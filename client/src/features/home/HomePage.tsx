@@ -1,4 +1,3 @@
-import React from 'react'
 import DefaultButton from '../../components/buttons/DefaultButton'
 import { Link } from 'react-router'
 

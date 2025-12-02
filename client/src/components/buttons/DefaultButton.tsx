@@ -6,7 +6,7 @@ interface DefaultButtonProps {
 export default function DefaultButton({ text, onClickProps }: DefaultButtonProps) {
     return (
         <button
-            className="w-full text-gray-900 bg-foresty hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 max-w-sm text-center cursor-pointer"
+            className="w-full text-gray-900 bg-foresty hover:bg-forestyhover focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 max-w-sm text-center cursor-pointer"
             onClick={onClickProps}
         >
             {text}
