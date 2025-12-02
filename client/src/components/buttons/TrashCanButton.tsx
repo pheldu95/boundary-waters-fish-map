@@ -1,4 +1,5 @@
 import type { UseMutationResult } from "@tanstack/react-query";
+import LoadingSpinner from "../placeholders/LoadingSpinner";
 
 type TrashCanButtonProps<TArgs, TError = Error> = {
     itemId: TArgs;
@@ -18,7 +19,7 @@ export default function TrashCanButton<TArgs, TError = Error>({
                 className="focus:outline-none disabled:opacity-50 flex items-center justify-center cursor-pointer"
             >
                 {isDeleting ?
-                    <div className="border-transparent h-10 w-10 animate-spin rounded-full border-8 border-t-redish" />
+                    <LoadingSpinner />
                     : <i className="fas fa-trash text-xl w-10"></i>
                 }
             </button>

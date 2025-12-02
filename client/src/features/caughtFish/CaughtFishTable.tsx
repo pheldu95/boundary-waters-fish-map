@@ -3,13 +3,14 @@ import TableData from "../../components/tables/TableData/TableData";
 import { useCaughtFish } from "../../lib/hooks/useCaughtFish";
 import TrashCanButton from "../../components/buttons/TrashCanButton";
 import ViewDetailsButton from "../../components/buttons/ViewDetailsButton";
+import LoadingTablePlaceholder from "../../components/placeholders/LoadingTablePlaceholder";
 
 export default function CaughtFishTable() {
     const headerText = ["Species", "Length (inches)", "Date Caught", "Lure Used", "Actions"];
 
     const { caughtFishes, isLoading, deleteCaughtFish } = useCaughtFish();
 
-    if (!caughtFishes || isLoading) return <p>Loading...</p>;
+    if (!caughtFishes || isLoading) return <LoadingTablePlaceholder headerText={headerText}/>;
 
     return (
         <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden w-3/4 mx-auto">

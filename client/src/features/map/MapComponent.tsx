@@ -4,6 +4,7 @@ import { DivIcon } from 'leaflet'
 import { useCampsite } from '../../lib/hooks/useCampsite';
 import LocationMarker from './LocationMarker';
 import { useCaughtFish } from '../../lib/hooks/useCaughtFish';
+import LoadingMapPlaceholder from '../../components/placeholders/LoadingMapPlaceholder';
 
 type Props = {
     addingCaughtFish: boolean;
@@ -13,7 +14,7 @@ export default function MapComponent({ addingCaughtFish }: Props) {
     const { campsites, isPending } = useCampsite();
     const { allCaughtFishes } = useCaughtFish();
 
-    if (!campsites || isPending || !allCaughtFishes) return <p>Loading...</p>;
+    if (!campsites || isPending || !allCaughtFishes) return <LoadingMapPlaceholder />;
 
     const campsiteIcon = new DivIcon({
         html: `

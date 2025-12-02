@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NavLink } from "react-router";
 
 type Props = {
@@ -23,7 +22,7 @@ export default function SideBar({ isOpen, setIsOpen}: Props) {
                     </NavLink>
                     <NavLink
                         className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium"
-                        to="/"
+                        to="/caughtFish"
                         onClick={() => setIsOpen(false)}
                     >
                         My Fish Log
