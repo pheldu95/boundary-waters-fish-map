@@ -8,19 +8,19 @@ export default function NavBar() {
                     <NavLink to="/">
                         <div className="flex items-center space-x-2">
                             {/* <img className="h-[42px]" src="{{ asset('images/canoe_logo.png') }}" alt="canoe logo"> */}
-                            <span className="text-xl font-bold text-yellowbone bg-clip-text hover:text-redish transition-colors duration-200">
+                            <span className="text-xl font-bold text-yellowishbone bg-clip-text hover:text-redish transition-colors duration-200">
                                 Boundary Waters Fish Map
                             </span>
                         </div>
                     </NavLink>
                     <nav className="hidden sm:flex space-x-8">
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/">
                             Home
                         </NavLink>
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/about">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/about">
                             About
                         </NavLink>
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/contact">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/contact">
                             Contact
                         </NavLink>
                     </nav>
@@ -34,13 +34,13 @@ export default function NavBar() {
 
                 <nav className="sm:hidden hidden pb-4" id="mobile-menu">
                     <div className="flex flex-col space-y-3">
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/">
                             Home
                         </NavLink>
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/about">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/about">
                             About
                         </NavLink>
-                        <NavLink className="text-yellowbone hover:text-redish transition-colors duration-200 font-medium" to="/contact">
+                        <NavLink className="text-yellowishbone hover:text-redish transition-colors duration-200 font-medium" to="/contact">
                             Contact
                         </NavLink>
                     </div>
