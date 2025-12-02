@@ -1,7 +1,7 @@
 import type { Marker as LeafletMarker } from 'leaflet';
 import { useEffect, useRef, useState } from 'react'
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
-import CaughtFishForm from '../CaughtFish/CaughtFishForm';
+import CaughtFishForm from '../caughtFish/CaughtFishForm';
 
 export default function LocationMarker() {
     const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
