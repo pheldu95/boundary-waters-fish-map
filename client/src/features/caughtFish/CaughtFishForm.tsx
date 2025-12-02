@@ -1,6 +1,7 @@
-import React, { use, type FormEvent } from 'react'
+import React, { useState, type FormEvent } from 'react'
 import { useCaughtFish } from '../../lib/hooks/useCaughtFish'
 import type { CaughtFish } from '../../lib/types';
+import { useFishingLure } from '../../lib/hooks/useFishingLure';
 
 type Props = {
   latitude: number;
@@ -8,7 +9,13 @@ type Props = {
 }
 
 export default function CaughtFishForm({ latitude, longitude }: Props) {
+  const { fishingLures, isPending } = useFishingLure();
   const { createCaughtFish } = useCaughtFish();
+  const [selectedFishingLure, setSelectedFishingLure] = useState();
+
+  const handleChange = (event) => {
+    setSelectedFishingLure(event.target.value);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,10 +34,18 @@ export default function CaughtFishForm({ latitude, longitude }: Props) {
     <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
       <label>Date</label>
       <input name='caughtDate' type="date" />
+
       <label>Species </label>
       <input name='fishSpecies' type="text" />
+
       <label>Lure</label>
       <input name='fishingLure' type="text" />
+      <select name="fishingLure" value={selectedFishingLure} onChange={handleChange}>
+        {fishingLures?.map((lure) => (
+          <option key={lure.id} value={`/api/fishing_lures/${lure.id}`}>{lure.name}</option>
+        ))}
+      </select>
+
       <input type="hidden" name="latitude" value={latitude} />
       <input type="hidden" name="longitude" value={longitude} />
       <input type="hidden" name="caughtBy" value='/api/users/61' /> {/* Temporary until auth is implemented */}
