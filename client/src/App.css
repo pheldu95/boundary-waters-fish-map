@@ -7,6 +7,11 @@
     background-color: rgb(255 244 158);
     color: black;
     border-radius: 0;
+    width: 400px;
+}
+
+.leaflet-popup-content {
+    width: 90% !important;
 }
 
 .leaflet-popup-tip {
