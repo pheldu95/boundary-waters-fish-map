@@ -1,7 +1,8 @@
 import type { Marker as LeafletMarker } from 'leaflet';
 import { useEffect, useRef, useState } from 'react'
-import { Marker, Popup, useMapEvents } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 import CaughtFishForm from '../caughtFish/CaughtFishForm';
+import { useAddFishMapClick } from '../../lib/hooks/useAddFishMapClick';
 
 export default function LocationMarker() {
     const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
@@ -16,16 +17,7 @@ export default function LocationMarker() {
         }
     }, [position]);
 
-    const map = useMapEvents({
-        click(e) {
-            const { lat, lng } = e.latlng;
-            setPosition({
-                latitude: lat,
-                longitude: lng,
-            });
-            map.flyTo(e.latlng, map.getZoom());
-        },
-    });
+    useAddFishMapClick(setPosition); //pans view to where the user is adding a fish
 
     if (position.latitude === 0 && position.longitude === 0) return null;
 
@@ -37,7 +29,7 @@ export default function LocationMarker() {
             <Popup
                 closeOnClick={true}
             >
-                <CaughtFishForm latitude={position.latitude} longitude={position.longitude} markerRef={markerRef}/>
+                <CaughtFishForm latitude={position.latitude} longitude={position.longitude} markerRef={markerRef} />
             </Popup>
         </Marker>
     )
