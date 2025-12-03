@@ -3,6 +3,7 @@ import { useCaughtFish } from '../../lib/hooks/useCaughtFish'
 import type { CaughtFish } from '../../lib/types';
 import { useFishingLure } from '../../lib/hooks/useFishingLure';
 import { useFishSpecies } from '../../lib/hooks/useFishSpecies';
+import DefaultButton from '../../components/buttons/DefaultButton';
 
 type Props = {
   latitude: number;
@@ -68,9 +69,8 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
       <input type="hidden" name="latitude" value={latitude} />
       <input type="hidden" name="longitude" value={longitude} />
       <input type="hidden" name="caughtBy" value='/api/users/61' /> {/* Temporary until auth is implemented */}
-      <button type="submit" className="w-full text-yellowishbone bg-foresty focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 max-w-sm text-center cursor-pointer">
-        Submit
-      </button>
+      
+      <DefaultButton text={'Submit'} type='submit' />
     </form>
   )
 }

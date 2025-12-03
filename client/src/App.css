@@ -4,9 +4,12 @@
 }
 
 .leaflet-popup-content-wrapper {
-    background-color: rgb(255 244 158);;
+    background-color: rgb(255 244 158);
     color: black;
+    border-radius: 0;
 }
+
 .leaflet-popup-tip {
-    background-color: rgb(255 244 158);;
+    background-color: rgb(255 244 158);
+    ;
 }
