@@ -1,10 +1,11 @@
-import React, { useState, type FormEvent } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCaughtFish } from '../../lib/hooks/useCaughtFish'
-import type { CaughtFish } from '../../lib/types';
 import { useFishingLure } from '../../lib/hooks/useFishingLure';
 import { useFishSpecies } from '../../lib/hooks/useFishSpecies';
 import DefaultButton from '../../components/buttons/DefaultButton';
 import type { Marker } from 'leaflet';
+import { useForm, type FieldValues } from "react-hook-form";
+import { useParams } from 'react-router';
 
 type Props = {
   latitude: number;
@@ -13,9 +14,12 @@ type Props = {
 }
 
 export default function CaughtFishForm({ latitude, longitude, markerRef }: Props) {
+  const { register, reset, handleSubmit } = useForm()
+  const {id} = useParams();
+
   const { fishingLures } = useFishingLure();
   const { fishSpecies } = useFishSpecies();
-  const { createCaughtFish } = useCaughtFish();
+  const { createCaughtFish, updateCaughtFish, caughtFish } = useCaughtFish(id);
   const [selectedFishingLure, setSelectedFishingLure] = useState('');
   const [selectedFishSpecies, setSelectedFishSpecies] = useState('');
   const [addNote, setAddNote] = useState(false);
@@ -28,34 +32,29 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
     setSelectedFishingLure(event.target.value);
   };
 
+  useEffect(() => {
+    if(caughtFish) reset(caughtFish); //reset form with existing caught fish data
+  }, [caughtFish, reset]);
+
   const toggleAddNote = () => {
     setAddNote(!addNote);
   }
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const onSubmit = (data: FieldValues) => {
 
-    //the name of each key come from the "name" property on each textfield
-    const data: { [key: string]: FormDataEntryValue } = {}
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-
-    createCaughtFish.mutate(data as unknown as CaughtFish);
-
-    markerRef?.current?.closePopup();
+    console.log(data);
+    // markerRef?.current?.closePopup();
   }
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col gap-2 w-full items-center'>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 w-full items-center'>
       <div className="w-[90%]">
         <label htmlFor='caughtDate' className="mb-1 block text-s font-small">Date</label>
         <input
           id='caughtDate'
-          name='caughtDate'
+          {...register('caughtDate')}
           type="date"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
+          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
         />
       </div>
 
@@ -63,10 +62,10 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
         <label htmlFor='fishSpecies' className="mb-1 block text-s font-small">Species </label>
         <select
           id='fishSpecies'
-          name="fishSpecies"
+          {...register('fishSpecies')}
           value={selectedFishSpecies}
           onChange={handleSpeciesChange}
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
+          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
         >
           <option value="" disabled hidden>
             Choose...
@@ -82,10 +81,10 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
         <select
           id='fishingLure'
           defaultValue=""
-          name="fishingLure"
+          {...register('fishingLure')}
           value={selectedFishingLure}
           onChange={handleLureChange}
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
+          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
         >
           <option value="" disabled hidden>
             Choose...
@@ -96,6 +95,16 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
         </select>
       </div>
 
+      <div className="w-[90%]">
+        <label htmlFor='length' className="mb-1 block text-s font-small">Length (Inches)</label>
+        <input
+          id='length'
+          {...register('length')}
+          type="number"
+          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
+        />
+      </div>
+
       <button className='cursor-pointer w-24 hover:text-forestyhover transition-colors' onClick={toggleAddNote} type='button'>{addNote ? 'Cancel' : 'Add Note'}</button>
 
       <div className={`w-full overflow-hidden transition-all duration-300 ease-in-out ${addNote ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
@@ -103,14 +112,14 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
         <label htmlFor='note' className="mb-1 block text-s font-small">Note</label>
         <textarea
           id='note'
-          name='note'
-          className='w-full rounded-md border border-[#e0e0e0] bg-white py-1 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md'
+          {...register('note')}
+          className='w-full border border-[#e0e0e0] bg-white py-1 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md'
         />
       </div>
 
-      <input type="hidden" name="latitude" value={latitude} />
-      <input type="hidden" name="longitude" value={longitude} />
-      <input type="hidden" name="caughtBy" value='/api/users/67' /> {/* Temporary until auth is implemented */}
+      <input type="hidden" {...register('latitude')} value={latitude} />
+      <input type="hidden" {...register("longitude")} value={longitude} />
+      <input type="hidden" {...register('caughtBy')} value='/api/users/67' /> {/* Temporary until auth is implemented */}
 
       <DefaultButton text={'Submit'} type='submit' />
     </form>

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { CaughtFish, HydraCollection } from "../types";
 import axios from "axios";
 
-export const useCaughtFish = () => {
+export const useCaughtFish = (id?: string) => {
     const queryClient = useQueryClient();
 
     const { data: caughtFishes, isLoading } = useQuery<CaughtFish[]>({
@@ -19,6 +19,15 @@ export const useCaughtFish = () => {
             const response = await axios.get<HydraCollection<CaughtFish>>('/api/caught_fishes?pagination=false');
             return response.data.member;
         },
+    });
+
+    const { data: caughtFish, isLoading: isLoadingcaughtFish } = useQuery({
+        queryKey: ['caughtFishes', id],
+        queryFn: async () => {
+            const response = await axios.get<CaughtFish>(`/api/caughtFishes/${id}`)
+            return response.data;
+        },
+        enabled: !!id //this means the function will only execute if we have an id
     });
 
     const deleteCaughtFish = useMutation({
@@ -68,6 +77,8 @@ export const useCaughtFish = () => {
         isLoading,
         deleteCaughtFish,
         updateCaughtFish,
-        createCaughtFish
+        createCaughtFish,
+        caughtFish,
+        isLoadingcaughtFish
     };
 }
