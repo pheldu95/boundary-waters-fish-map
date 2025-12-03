@@ -29,6 +29,7 @@ export default function MapPage() {
 
                     <MapButton text='Species' />
                     <MapButton text='Lure' />
+                    <MapButton text='Length' />
                 </div>
 
             </div>

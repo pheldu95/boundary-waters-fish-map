@@ -9,6 +9,7 @@ import { useParams } from 'react-router';
 import { caughtFishSchema, CaughtFishSchema } from '../../lib/schemas/caughtFishSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import DateInput from '../../components/form/DateInput';
+import SelectInput from '../../components/form/SelectInput';
 
 type Props = {
   latitude: number;
@@ -17,31 +18,36 @@ type Props = {
 }
 
 export default function CaughtFishForm({ latitude, longitude, markerRef }: Props) {
-  const { register, reset, handleSubmit, formState: {errors} } = useForm<CaughtFishSchema>({
+  const { register, reset, handleSubmit, formState: { errors } } = useForm<CaughtFishSchema>({
     mode: 'onTouched',
     resolver: zodResolver(caughtFishSchema)
   });
-
-  const {id} = useParams();
-
+  const { id } = useParams();
   const { fishingLures } = useFishingLure();
   const { fishSpecies } = useFishSpecies();
   const { createCaughtFish, updateCaughtFish, caughtFish } = useCaughtFish(id);
-  const [selectedFishingLure, setSelectedFishingLure] = useState('');
-  const [selectedFishSpecies, setSelectedFishSpecies] = useState('');
   const [addNote, setAddNote] = useState(false);
 
-  const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFishSpecies(event.target.value);
-  };
-
-  const handleLureChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFishingLure(event.target.value);
-  };
-
   useEffect(() => {
-    if(caughtFish) reset(caughtFish); //reset form with existing caught fish data
+    if (caughtFish) reset({
+      caughtDate: caughtFish.caughtDate,
+      fishSpecies: caughtFish.fishSpecies.id.toString(),
+      fishingLure: caughtFish.fishingLure.id.toString()
+    }); //reset form with existing caught fish data
   }, [caughtFish, reset]);
+
+  if (!fishSpecies || !fishingLures) {
+    return <div>Loading...</div>; // or some loading component
+  }
+  //options to use for our select component
+  const fishSpeciesOptions = fishSpecies.map(species => ({
+    value: species.id.toString(),
+    label: species.name
+  }));
+  const fishingLureOptions = fishingLures.map(lure => ({
+    value: lure.id.toString(),
+    label: lure.name
+  }));
 
   const toggleAddNote = () => {
     setAddNote(!addNote);
@@ -56,53 +62,27 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 w-full items-center'>
       <div className="w-[90%]">
-        <DateInput label="Caught Date" propertyName="caughtDate" register={register} required/>
-        {/* <label htmlFor='caughtDate' className="mb-1 block text-s font-small">Date</label>
-        <input
-          id='caughtDate'
-          {...register('caughtDate')}
-          type="date"
-          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
-          // error={!!errors.title}
-          // helperText={errors.title?.message}
-        /> */}
+        <DateInput<CaughtFishSchema> label="Caught Date" propertyName="caughtDate" register={register} required />
       </div>
 
       <div className="w-[90%]">
-        <label htmlFor='fishSpecies' className="mb-1 block text-s font-small">Species </label>
-        <select
-          id='fishSpecies'
-          {...register('fishSpecies')}
-          value={selectedFishSpecies}
-          onChange={handleSpeciesChange}
-          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
-        >
-          <option value="" disabled hidden>
-            Choose...
-          </option>
-          {fishSpecies?.map((species) => (
-            <option key={species.id} value={`/api/fish_species/${species.id}`}>{species.name}</option>
-          ))}
-        </select>
+        <SelectInput<CaughtFishSchema>
+          label="Fish Species"
+          propertyName="fishSpecies"
+          register={register}
+          options={fishSpeciesOptions}
+          required={true}
+        />
       </div>
 
       <div className="w-[90%]">
-        <label htmlFor='fishingLure' className="mb-1 block text-s font-small">Lure</label>
-        <select
-          id='fishingLure'
-          defaultValue=""
-          {...register('fishingLure')}
-          value={selectedFishingLure}
-          onChange={handleLureChange}
-          className="w-full border border-[#e0e0e0] bg-white py-3 px-6 text-base font-small text-grey outline-none focus:border-foresty focus:shadow-md"
-        >
-          <option value="" disabled hidden>
-            Choose...
-          </option>
-          {fishingLures?.map((lure) => (
-            <option key={lure.id} value={`/api/fishing_lures/${lure.id}`}>{lure.name}</option>
-          ))}
-        </select>
+        <SelectInput<CaughtFishSchema>
+          label="Fishing Lure"
+          propertyName="fishingLure"
+          register={register}
+          options={fishingLureOptions}
+          required={true}
+        />
       </div>
 
       <div className="w-[90%]">
