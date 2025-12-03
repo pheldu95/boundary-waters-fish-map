@@ -5,12 +5,17 @@ type Props = {
     setIsOpen: (isOpen: boolean) => void;
 }
 
-export default function SideBar({ isOpen, setIsOpen}: Props) {
-    
+export default function SideBar({ isOpen, setIsOpen }: Props) {
+
     return (
         <>
             {/*  'translate-x-0' makes siebar go to its normal position '-translate-x-full' makes sidebar go off the screen */}
-            <div className={`fixed top-0 left-0 h-full w-64 bg-fishblue z-40 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)]' : '-translate-x-full'
+            <div className={`
+                fixed top-0 left-0 h-full 
+                w-64 bg-fishblue z-40 
+                transition-transform duration-300 ease-in-out 
+                hover:shadow-none hover:translate-x-[2px] 
+                ${isOpen ? 'translate-x-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]' : '-translate-x-full'
                 }`}>
                 <div className="flex flex-col p-6 pt-20 space-y-4">
                     <NavLink
@@ -36,7 +41,7 @@ export default function SideBar({ isOpen, setIsOpen}: Props) {
                     </NavLink>
                 </div>
             </div>
-            
+
             {/* allows clicking off of the sidebar to close it */}
             {isOpen && (
                 <div

@@ -45,8 +45,8 @@ export default function MapComponent({ addingCaughtFish }: Props) {
             center={[48.0, -91.0]}
             zoom={10}
             scrollWheelZoom={true}
-            style={{ height: "600px", width: "80%" }}
-            className='mx-auto my-4 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)] z-0'
+            style={{ height: "600px", width: "90%" }}
+            className='mx-auto mb-4 z-1'
         >
             <TileLayer
                 attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
