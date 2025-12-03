@@ -14,16 +14,15 @@ export const useAddFishMapClick = (setPosition: (pos: Position) => void) => {
                 longitude: lng,
             });
             
-            // Get map dimensions
+            //map dimensions
             const mapHeight = map.getContainer().offsetHeight;
             const pixelOffset = mapHeight / 3;
             
-            // Convert pixel offset to lat/lng offset
+            //Convert pixel offset to lat/lng offset
             const targetPoint = map.project(e.latlng, map.getZoom());
             targetPoint.y = targetPoint.y - pixelOffset;
             const offsetLatLng = map.unproject(targetPoint, map.getZoom());
             
-            // Fly to the offset position
             map.flyTo(offsetLatLng, map.getZoom());
         },
     });
