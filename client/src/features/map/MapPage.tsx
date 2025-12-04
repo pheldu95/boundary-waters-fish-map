@@ -8,11 +8,11 @@ export default function MapPage() {
         <div className='h-full w-[90%] bg-fishblue mx-auto my-4 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)] pb-8'>
             <div className='flex flex-col lg:flex-row w-[90%] mx-auto justify-between'>
                 <div className='flex flex-wrap mt-4'>
-                    {addingCaughtFish ?
-                        <MapButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' />
-                        :
-                        <MapButton onClickProps={() => setAddingCaughtFish(true)} text='Add a Caught Fish' />
-                    }
+                    <MapButton
+                        onClickProps={() => setAddingCaughtFish(!addingCaughtFish)}
+                        text={addingCaughtFish ? 'Cancel' : 'Add a Caught Fish'}
+                        cancel={addingCaughtFish}
+                    />
                     <MapButton text='Add a Lure' />
                     <div className="flex items-center p-4 text-yellowishbone">
                         <i className="fa-solid fa-arrow-left-long fa-lg"></i>
