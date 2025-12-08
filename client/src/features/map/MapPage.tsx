@@ -39,7 +39,7 @@ export default function MapPage() {
 
                     <div className='flex mt-4'>
                         {addingCaughtFish ?
-                            <MapButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' />
+                            <MapButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' color={'bg-redish'} hoverColor={'bg-redishhover'}/>
                             :
                             <MapButton onClickProps={() => setAddingCaughtFish(true)} text='Add a Caught Fish' />
                         }
