@@ -32,6 +32,7 @@ export default function MapPage() {
             initialY={80}
             width={1500}
             onClose={() => console.log('close')}
+            constrainToViewport={false}
         >
             <div className='h-full w-[100%] bg-fishblue mx-auto pb-8 border-r border-l border-gray-500 font-bold shadow-2xl'>
                 <div className='flex w-[90%] mx-auto justify-between'>
