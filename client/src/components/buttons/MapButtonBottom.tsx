@@ -8,7 +8,7 @@ export default function MapButtonBottom({ text, onClickProps, type }: MapButtonP
     return (
         <button
             className="
-            group px-8 py-4 bg-foresty text-yellowishbone font-mono font-bold 
+            group px-8 py-4 bg-foresty text-yellowishbone font-bold 
             hover:bg-forestyhover transition-colors 
             hover:translate-x-[2px] hover:translate-y-[2px] 
             transition-all cursor-pointer

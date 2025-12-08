@@ -23,7 +23,7 @@ export default function MapPage() {
     ];
 
     return (
-        <div className='h-full w-[90%] bg-fishblue mx-auto my-4 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)] pb-8 border-3 border-redish'>
+        <div className='h-full w-[90%] bg-fishblue mx-auto my-4 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.1)] pb-8 border-3 border-redish font-bold'>
             <div className='flex w-[90%] mx-auto justify-between'>
 
                 <div className='flex mt-4'>
