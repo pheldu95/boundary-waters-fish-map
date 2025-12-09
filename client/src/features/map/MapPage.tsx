@@ -108,7 +108,11 @@ export default function MapPage() {
                             <p className="mr-2">Active Filters</p>
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
-                        <MapActiveFiltersSection caughtFishFilters={filters} handleSpeciesChange={handleSpeciesChange} />
+                        <MapActiveFiltersSection
+                            caughtFishFilters={filters}
+                            handleSpeciesChange={handleSpeciesChange}
+                            fishSpecies={fishSpecies} 
+                        />
                     </div>
                 </div>
             </div>
