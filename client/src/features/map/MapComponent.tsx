@@ -29,18 +29,6 @@ export default function MapComponent({ addingCaughtFish }: Props) {
     //     popupAnchor: [0, -42]
     // });
 
-    const fishIcon = new DivIcon({
-        html: `
-            <div class="fish-marker">
-                <i class="fa-solid fa-fish"></i>
-            </div>
-        `,
-        className: 'custom-div-icon',
-        iconSize: [30, 42],
-        iconAnchor: [15, 42],
-        popupAnchor: [0, -42]
-    });
-
     return (
         <MapContainer
             center={[48.0, -91.0]}
@@ -78,7 +66,7 @@ export default function MapComponent({ addingCaughtFish }: Props) {
                 spiderfyOnMaxZoom={false}
             >
                 {allCaughtFishes.map((caughtFish) => (
-                    <CaughtFishPopup caughtFish={caughtFish} icon={fishIcon}/>
+                    <CaughtFishPopup caughtFish={caughtFish} />
                 ))}
             </MarkerClusterGroup>
 
