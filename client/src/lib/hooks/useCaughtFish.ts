@@ -1,9 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { HydraCollection } from "../types";
 import axios from "axios";
-import type { CaughtFishRead, CaughtFishWrite } from "../types/caughtFishTypes";
+import type { CaughtFishFilters, CaughtFishRead, CaughtFishWrite } from "../types/caughtFishTypes";
 
-export const useCaughtFish = (id?: string) => {
+export const useCaughtFish = (
+    id?: string,
+    filters?: CaughtFishFilters
+) => {
     const queryClient = useQueryClient();
 
     const { data: caughtFishes, isLoading } = useQuery<CaughtFishRead[]>({
@@ -15,9 +18,20 @@ export const useCaughtFish = (id?: string) => {
     });
 
     const { data: allCaughtFishes } = useQuery<CaughtFishRead[]>({
-        queryKey: ['caughtFishes', 'all'],
+        queryKey: ['caughtFishes', 'all', filters],
         queryFn: async () => {
-            const response = await axios.get<HydraCollection<CaughtFishRead>>('/api/caught_fishes?pagination=false');
+            const params: Record<string, string> = {
+                pagination: 'false'
+            };
+
+            if (filters?.fishSpeciesId) {
+                params['fishSpecies.id'] = filters.fishSpeciesId.toString();
+            }
+
+            const queryString = new URLSearchParams(params).toString();
+            const response = await axios.get<HydraCollection<CaughtFishRead>>(
+                `/api/caught_fishes?${queryString}`
+            );
             return response.data.member;
         },
     });
@@ -25,7 +39,7 @@ export const useCaughtFish = (id?: string) => {
     const { data: caughtFish, isLoading: isLoadingcaughtFish } = useQuery({
         queryKey: ['caughtFishes', id],
         queryFn: async () => {
-            const response = await axios.get<CaughtFishRead>(`/api/caughtFishes/${id}`)
+            const response = await axios.get<CaughtFishRead>(`/api/caught_fishes/${id}`)
             return response.data;
         },
         enabled: !!id //this means the function will only execute if we have an id

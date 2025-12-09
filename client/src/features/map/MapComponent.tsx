@@ -6,6 +6,8 @@ import LocationMarker from './LocationMarker';
 import { useCaughtFish } from '../../lib/hooks/useCaughtFish';
 import LoadingMapPlaceholder from '../../components/placeholders/LoadingMapPlaceholder';
 import CaughtFishPopup from '../caughtFish/CaughtFishPopup';
+import type { CaughtFishFilters } from '../../lib/types/caughtFishTypes';
+import { useState } from 'react';
 
 type Props = {
     addingCaughtFish: boolean;
@@ -13,7 +15,10 @@ type Props = {
 
 export default function MapComponent({ addingCaughtFish }: Props) {
     const { campsites, isPending } = useCampsite();
-    const { allCaughtFishes } = useCaughtFish();
+    const [filters, setFilters] = useState<CaughtFishFilters>({
+        fishSpeciesId: undefined,
+    });
+    const { allCaughtFishes } = useCaughtFish(undefined, filters);
 
     if (!campsites || isPending || !allCaughtFishes) return <LoadingMapPlaceholder />;
 

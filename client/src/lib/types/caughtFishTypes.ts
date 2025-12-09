@@ -23,4 +23,8 @@ type CaughtFishWrite = {
   note?: string | undefined
 };
 
-export type { CaughtFishRead, CaughtFishWrite };
+type CaughtFishFilters = {
+  fishSpeciesId?: number;
+}
+
+export type { CaughtFishRead, CaughtFishWrite, CaughtFishFilters };
