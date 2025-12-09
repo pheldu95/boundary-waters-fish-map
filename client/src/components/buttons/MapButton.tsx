@@ -20,7 +20,9 @@ export default function MapButton({ text, onClickProps, type, color='bg-foresty'
             onClick={onClickProps}
             type={type ? type : 'button'}
         >
-            {text}
+            <span className="inline-block transition-all duration-300">
+                {text}
+            </span>
         </button>
     )
 }

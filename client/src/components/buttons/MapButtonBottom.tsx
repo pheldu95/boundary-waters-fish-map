@@ -18,7 +18,9 @@ export default function MapButtonBottom({ text, onClickProps, type }: MapButtonP
             onClick={onClickProps}
             type={type ? type : 'button'}
         >
-            {text}
+            <span className="inline-block transition-all duration-300">
+                {text}
+            </span>
         </button>
     )
 }
