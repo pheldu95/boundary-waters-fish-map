@@ -4,10 +4,20 @@ import MapButton from '../../components/buttons/MapButton';
 import MapButtonBottom from '../../components/buttons/MapButtonBottom';
 // import { TileLayer } from 'react-leaflet';
 import DraggableWindow from '../../components/DraggableWindow';
+import type { CaughtFishFilters } from '../../lib/types/caughtFishTypes';
 
 
 export default function MapPage() {
     const [addingCaughtFish, setAddingCaughtFish] = useState(false);
+    const [filters, setFilters] = useState<CaughtFishFilters>({
+        fishSpeciesId: undefined,
+    });
+    const handleSpeciesChange = (speciesId: number | undefined) => {
+        setFilters(prev => ({
+            ...prev,
+            fishSpeciesId: speciesId
+        }));
+    };
 
     // const tileLayerOptions = [
     //     <TileLayer
@@ -56,14 +66,14 @@ export default function MapPage() {
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
 
-                        <MapButton text='Species' />
+                        <MapButton text='Species' onClickProps={() => handleSpeciesChange(121)}/>
                         <MapButton text='Lure' />
                         <MapButton text='Length' />
                     </div>
 
                 </div>
                 <div className={addingCaughtFish ? 'map-container-add-fish' : ''}>
-                    <MapComponent addingCaughtFish={addingCaughtFish} />
+                    <MapComponent addingCaughtFish={addingCaughtFish} filters={filters} />
                 </div>
                 <div className='flex w-[90%] mx-auto'>
                     <div className='flex mb-4'>
