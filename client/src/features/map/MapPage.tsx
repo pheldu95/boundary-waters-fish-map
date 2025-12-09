@@ -12,16 +12,16 @@ export default function MapPage() {
     const [selectFishSpecies, setSelectFishSpecies] = useState(false);
     const [addingCaughtFish, setAddingCaughtFish] = useState(false);
     const [filters, setFilters] = useState<CaughtFishFilters>({
-        fishSpeciesId: undefined,
+        fishSpeciesIds: undefined,
     });
 
-    const handleSpeciesChange = (speciesId: string | undefined) => {
+    const handleSpeciesChange = (speciesId: string) => {
         setFilters(prev => ({
             ...prev,
-            fishSpeciesId: speciesId
+            fishSpeciesIds: prev.fishSpeciesIds?.includes(speciesId)
+                ? prev.fishSpeciesIds.filter(id => id !== speciesId) //remove if already selected
+                : [...(prev.fishSpeciesIds || []), speciesId] //add if not selected
         }));
-
-        setSelectFishSpecies(false);
     };
 
     // const tileLayerOptions = [
@@ -75,7 +75,7 @@ export default function MapPage() {
                         {selectFishSpecies && fishSpecies &&
                             <select
                                 onChange={(e) => handleSpeciesChange(e.target.value)}
-                                value={filters.fishSpeciesId || ''}
+                                value={''}
                             >
                                 <option value="">All Species</option>
                                 {fishSpecies.map(species => (
@@ -85,6 +85,7 @@ export default function MapPage() {
                                 ))}
                             </select>
                         }
+                        
                         <MapButton text='Lure' />
                         <MapButton text='Length' />
                     </div>

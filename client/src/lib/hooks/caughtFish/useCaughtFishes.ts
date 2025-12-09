@@ -20,8 +20,10 @@ export const useCaughtFishes = (filters?: CaughtFishFilters) => {
                 pagination: 'false'
             };
 
-            if (filters?.fishSpeciesId) {
-                params['fishSpecies.id'] = filters.fishSpeciesId;
+            if (filters?.fishSpeciesIds) {
+                filters.fishSpeciesIds.forEach((id, index) => {
+                    params[`fishSpecies.id[${index}]`] = id; // adding the index lets me add multiple &fishSpecies.id= to the queryString
+                });
             }
 
             const queryString = new URLSearchParams(params).toString();
