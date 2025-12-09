@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router';
 import './App.css'
-import Footer from './components/Footer';
-import NavBar from './components/NavBar';
-import SideBar from './components/SideBar';
+import Footer from './features/layout/Footer';
+import NavBar from './features/layout/NavBar';
+import SideBar from './features/layout/SideBar';
 import { useState } from 'react';
 
 function App() {
