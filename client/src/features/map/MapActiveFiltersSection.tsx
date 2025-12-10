@@ -28,9 +28,9 @@ export default function MapActiveFiltersSection({
     });
 
     return (
-        <div className="flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {/* fish species */}
-            <div className="text-yellowishbone flex-1">
+            <div className="text-yellowishbone">
                 {caughtFishFilters.fishSpeciesIds && <p className="bg-foresty">Species</p>}
                 <div className="grid grid-cols-4 items-center rounded-b-lg bg-foresty shadow-md">
                     {caughtFishFilters.fishSpeciesIds &&
@@ -55,7 +55,7 @@ export default function MapActiveFiltersSection({
             </div>
 
             {/* fishing lures */}
-            <div className="text-yellowishbone flex-1">
+            <div className="text-yellowishbone">
                 {caughtFishFilters.fishingLureIds && <p className="bg-foresty">Lures</p>}
                 <div className="grid grid-cols-4 items-center rounded-b-lg bg-foresty shadow-md">
                     {caughtFishFilters.fishingLureIds && fishingLures &&
@@ -67,7 +67,7 @@ export default function MapActiveFiltersSection({
                             return (
                                 <div className="group relative inline-block" key={fishingLureId}>
                                     <button onClick={() => handleFishingLureChange(fishingLureId)}>
-                                        <i className={`fa-solid fa-shrimp fa-xl ${iconColor} cursor-pointer mx-1 hover:text-redishhover hover:translate-x-[2px] hover:translate-y-[2px] px-2`}></i>
+                                        <i className={`fa-solid fa-shrimp fa-xl ${iconColor} cursor-pointer mx-1 hover:text-redishhover hover:translate-x-[2px] hover:translate-y-[2px]`}></i>
                                     </button>
                                     <div
                                         className="z-2 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-2 bg-gray-50 text-black text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
