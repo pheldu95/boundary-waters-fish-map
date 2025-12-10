@@ -1,9 +1,9 @@
 export const fishIconColorMap: Record<string, string> = {
     'Smallmouth Bass': 'text-amber-700',
-    'Northern Pike': 'text-green-700',
+    'Northern Pike': 'text-green-900',
     'Walleye': 'text-yellow-600',
     'Muskellunge': 'text-slate-700',
-    'Largemouth Bass': 'text-green-800',
+    'Largemouth Bass': 'text-green-200',
     'Crappie': 'text-zinc-600',
     'Bluegill': 'text-blue-600',
     'Sunfish': 'text-orange-500',

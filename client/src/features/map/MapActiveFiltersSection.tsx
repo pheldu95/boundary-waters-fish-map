@@ -19,21 +19,25 @@ export default function MapActiveFiltersSection({ caughtFishFilters, handleSpeci
     });
 
     return (
-        <div className="grid grid-cols-4 items-center">
-            {caughtFishFilters.fishSpeciesIds &&
-                caughtFishFilters.fishSpeciesIds.map((speciesId) => (
-                    <div className="group relative inline-block">
-                        <button onClick={() => handleSpeciesChange(speciesId)}>
-                            <i className={`fa-solid fa-fish fa-xl ${fishIconColors[speciesId]} cursor-pointer mx-1`}></i>
-                        </button>
-                        <div className="z-2 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-2 bg-redish text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                            <p>
-                                Click to remove filter
-                            </p>
+        <div className="text-yellowishbone">
+            {caughtFishFilters.fishSpeciesIds && <p className="bg-foresty">Species</p>}
+            <div className="grid grid-cols-4 items-center rounded-b-lg bg-foresty shadow-md">
+                {caughtFishFilters.fishSpeciesIds &&
+                    caughtFishFilters.fishSpeciesIds.map((speciesId) => (
+                        <div className="group relative inline-block">
+                            <button onClick={() => handleSpeciesChange(speciesId)}>
+                                <i className={`fa-solid fa-fish fa-xl ${fishIconColors[speciesId]} cursor-pointer mx-1 hover:translate-x-[2px] hover:translate-y-[2px] `}></i>
+                            </button>
+                            <div 
+                            className="z-2 absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-2 bg-redish text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                <p>
+                                    Click to remove filter
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
     )
 }

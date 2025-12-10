@@ -20,7 +20,7 @@ export default function MapComponent({ addingCaughtFish, filters }: Props) {
     return (
         <MapContainer
             center={[48.0, -91.0]}
-            zoom={10}
+            zoom={9}
             scrollWheelZoom={true}
             style={{ height: "480px", width: "90%" }}
             className='mx-auto z-1'

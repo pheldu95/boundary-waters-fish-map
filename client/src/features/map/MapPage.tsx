@@ -71,17 +71,28 @@ export default function MapPage() {
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
 
-                        <MapButton text='Species' onClickProps={() => setSelectFishSpecies(!selectFishSpecies)} />
-                        {selectFishSpecies && fishSpecies &&
+                        {fishSpecies &&
                             <select
                                 onChange={(e) => handleSpeciesChange(e.target.value)}
                                 value={''}
+                                className="w-38 group px-8 py-4 bg-foresty text-yellowishbone font-bold 
+                                        hover:bg-forestyhover transition-colors 
+                                        hover:translate-x-[2px] hover:translate-y-[2px] 
+                                        transition-all cursor-pointer
+                                        rounded-t-lg focus:outline-none
+                                        shadow-md"
                             >
-                                <option value="">All Species</option>
+                                <option className="bg-gray-50 text-black" value="">Species</option>
                                 {fishSpecies.map(species => (
-                                    <option key={species.id} value={species.id}>
-                                        {species.name}
-                                    </option>
+                                    filters.fishSpeciesIds?.includes(species.id.toString()) ? (
+                                        <option key={species.id} value={species.id} className="bg-foresty text-yellowishbone">
+                                            ✓ {species.name} (Already selected)
+                                        </option>
+                                    ) : (
+                                        <option key={species.id} value={species.id} className="bg-gray-50 text-black">
+                                            {species.name}
+                                        </option>
+                                    )
                                 ))}
                             </select>
                         }
@@ -108,11 +119,18 @@ export default function MapPage() {
                             <p className="mr-2">Active Filters</p>
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
-                        <MapActiveFiltersSection
-                            caughtFishFilters={filters}
-                            handleSpeciesChange={handleSpeciesChange}
-                            fishSpecies={fishSpecies} 
-                        />
+                        {filters.fishSpeciesIds ?
+                            <MapActiveFiltersSection
+                                caughtFishFilters={filters}
+                                handleSpeciesChange={handleSpeciesChange}
+                                fishSpecies={fishSpecies}
+                            />
+                            :
+                            <div className="flex items-center p-4 text-yellowishbone">
+                                <p className="mr-2">None Applied</p>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
