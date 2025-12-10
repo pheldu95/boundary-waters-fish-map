@@ -10,7 +10,6 @@ import MapActiveFiltersSection from './MapActiveFiltersSection';
 
 export default function MapPage() {
     const { fishSpecies } = useFishSpecies();
-    const [selectFishSpecies, setSelectFishSpecies] = useState(false);
     const [addingCaughtFish, setAddingCaughtFish] = useState(false);
     const [filters, setFilters] = useState<CaughtFishFilters>({
         fishSpeciesIds: undefined,
@@ -85,11 +84,11 @@ export default function MapPage() {
                                 <option className="bg-gray-50 text-black" value="">Species</option>
                                 {fishSpecies.map(species => (
                                     filters.fishSpeciesIds?.includes(species.id.toString()) ? (
-                                        <option key={species.id} value={species.id} className="bg-foresty text-yellowishbone">
+                                        <option key={species.id} value={species.id} className="bg-foresty text-yellowishbone cursor-pointer">
                                             ✓ {species.name} (Already selected)
                                         </option>
                                     ) : (
-                                        <option key={species.id} value={species.id} className="bg-gray-50 text-black">
+                                        <option key={species.id} value={species.id} className="bg-gray-50 text-black cursor-pointer">
                                             {species.name}
                                         </option>
                                     )
