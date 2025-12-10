@@ -85,7 +85,7 @@ export default function MapPage() {
                                 {fishSpecies.map(species => (
                                     filters.fishSpeciesIds?.includes(species.id.toString()) ? (
                                         <option key={species.id} value={species.id} className="bg-foresty text-yellowishbone cursor-pointer">
-                                            ✓ {species.name} (Already selected)
+                                            ✓ {species.name}
                                         </option>
                                     ) : (
                                         <option key={species.id} value={species.id} className="bg-gray-50 text-black cursor-pointer">
