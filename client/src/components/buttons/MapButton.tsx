@@ -10,7 +10,7 @@ export default function MapButton({ text, onClickProps, type, color='bg-foresty'
     return (
         <button
             className={`
-            group px-8 py-4 ${color} text-yellowishbone font-bold 
+            group px-8 py-4 ${color} text-secondary font-bold 
             hover:${hoverColor} transition-colors 
             hover:translate-x-[2px] hover:translate-y-[2px] 
             transition-all cursor-pointer
