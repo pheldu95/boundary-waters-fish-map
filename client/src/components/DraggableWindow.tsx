@@ -113,7 +113,7 @@ export const DraggableWindow: React.FC<DraggableWindowProps> = ({
         left: `${position.x}px`,
         top: `${position.y}px`,
         cursor: isDragging ? 'grabbing' : 'default',
-        width: width ? `${width}px` : 'auto',
+        width: width ? `${width}%` : 'auto',
         minWidth: `${minWidth}px`,
         height: height ? `${height}px` : 'auto',
         minHeight: minHeight ? `${minHeight}px` : 'auto',
@@ -121,18 +121,18 @@ export const DraggableWindow: React.FC<DraggableWindowProps> = ({
       }}
     >
       <div
-        className="bg-fishbluedarker px-4 py-3 cursor-grab active:cursor-grabbing rounded-t-lg border-t border-r border-l border-gray-500"
+        className="bg-primarydark px-4 py-3 cursor-grab active:cursor-grabbing rounded-t-lg border-t border-r border-l border-gray-500"
         onMouseDown={handleMouseDown}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-yellowishbone select-none">
+          <h3 className="text-sm font-semibold text-secondary select-none">
             {title}
           </h3>
           <div className="flex items-center gap-2">
             {/* Window Controls */}
             <button
               onClick={handleClose}
-              className="text-yellowishbone hover:text-redish transition-colors p-1 hover:bg-white/10 rounded cursor-pointer"
+              className="text-secondary hover:text-negative transition-colors p-1 hover:bg-white/10 rounded cursor-pointer"
               type="button"
               aria-label="Close window"
             >
@@ -149,7 +149,7 @@ export const DraggableWindow: React.FC<DraggableWindowProps> = ({
         {children}
       </div>
       <div
-        className="bg-fishbluedarker px-4 py-3 rounded-b-lg border-b border-r border-l border-gray-500"
+        className="bg-primarydark px-4 py-3 rounded-b-lg border-b border-r border-l border-gray-500"
       />
     </div>
   );

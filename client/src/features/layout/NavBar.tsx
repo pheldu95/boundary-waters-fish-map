@@ -7,7 +7,7 @@ type Props = {
 
 export default function NavBar({ isOpen, setIsOpen }: Props) {
     return (
-        <header className="backdrop-blur-sm bg-fishblue border-b-3 border-redish shadow-lg sticky top-0 z-50 mb-4">
+        <header className="backdrop-blur-sm bg-primary border-b-3 border-negative shadow-lg sticky top-0 z-50 mb-4">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Left section - Burger menu */}
@@ -18,13 +18,13 @@ export default function NavBar({ isOpen, setIsOpen }: Props) {
                             aria-label="Toggle menu"
                         >
                             <div className="w-6 h-5 relative flex flex-col justify-between">
-                                <span className={`absolute w-full h-0.5 bg-yellowishbone group-hover:bg-redish transition-all duration-300 ease-in-out origin-center ${
+                                <span className={`absolute w-full h-0.5 bg-secondary group-hover:bg-negative transition-all duration-300 ease-in-out origin-center ${
                                     isOpen ? 'rotate-45 top-1/2 -translate-y-1/2' : 'rotate-0 top-0'
                                 }`}></span>
-                                <span className={`absolute w-full h-0.5 bg-yellowishbone group-hover:bg-redish transition-all duration-300 ease-in-out top-1/2 -translate-y-1/2 ${
+                                <span className={`absolute w-full h-0.5 bg-secondary group-hover:bg-negative transition-all duration-300 ease-in-out top-1/2 -translate-y-1/2 ${
                                     isOpen ? 'opacity-0' : 'opacity-100'
                                 }`}></span>
-                                <span className={`absolute w-full h-0.5 bg-yellowishbone group-hover:bg-redish transition-all duration-300 ease-in-out origin-center ${
+                                <span className={`absolute w-full h-0.5 bg-secondary group-hover:bg-negative transition-all duration-300 ease-in-out origin-center ${
                                     isOpen ? '-rotate-45 top-1/2 -translate-y-1/2' : 'rotate-0 bottom-0'
                                 }`}></span>
                             </div>
@@ -33,7 +33,7 @@ export default function NavBar({ isOpen, setIsOpen }: Props) {
 
                     <NavLink to="/" className="flex items-center space-x-2">
                         <img className="h-15" src="/fishmaplogo.png" alt="fishmap logo" />
-                        <span className="text-xl font-bold text-yellowishbone hover:text-redish transition-colors duration-200 whitespace-nowrap">
+                        <span className="text-xl font-bold text-secondary hover:text-negative transition-colors duration-200 whitespace-nowrap">
                             Boundary Waters Fish Map
                         </span>
                     </NavLink>
@@ -42,8 +42,8 @@ export default function NavBar({ isOpen, setIsOpen }: Props) {
                         <nav className="hidden sm:flex items-center space-x-6">
                             <NavLink 
                                 className={({ isActive }) => 
-                                    `text-yellowishbone hover:text-redish transition-colors duration-200 font-medium ${
-                                        isActive ? 'text-redish' : ''
+                                    `text-secondary hover:text-negative transition-colors duration-200 font-medium ${
+                                        isActive ? 'text-negative' : ''
                                     }`
                                 } 
                                 to="/"
@@ -52,8 +52,8 @@ export default function NavBar({ isOpen, setIsOpen }: Props) {
                             </NavLink>
                             <NavLink 
                                 className={({ isActive }) => 
-                                    `text-yellowishbone hover:text-redish transition-colors duration-200 font-medium ${
-                                        isActive ? 'text-redish' : ''
+                                    `text-secondary hover:text-negative transition-colors duration-200 font-medium ${
+                                        isActive ? 'text-negative' : ''
                                     }`
                                 } 
                                 to="/about"
@@ -62,8 +62,8 @@ export default function NavBar({ isOpen, setIsOpen }: Props) {
                             </NavLink>
                             <NavLink 
                                 className={({ isActive }) => 
-                                    `text-yellowishbone hover:text-redish transition-colors duration-200 font-medium ${
-                                        isActive ? 'text-redish' : ''
+                                    `text-secondary hover:text-negative transition-colors duration-200 font-medium ${
+                                        isActive ? 'text-negative' : ''
                                     }`
                                 } 
                                 to="/contact"

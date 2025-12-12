@@ -57,27 +57,27 @@ export default function MapPage() {
             title={'Fish Map'}
             initialX={180}
             initialY={80}
-            width={1500}
+            width={90}
             onClose={() => console.log('close')}
             constrainToViewport={false}
         >
-            <div className='h-full w-[100%] bg-fishblue mx-auto pb-8 border-r border-l border-gray-500 font-bold shadow-2xl'>
+            <div className='h-full w-[100%] bg-primary mx-auto pb-8 border-r border-l border-gray-500 font-bold shadow-2xl'>
                 <div className='flex w-[90%] mx-auto justify-between'>
                     <div className='flex mt-4'>
                         {addingCaughtFish ?
-                            <MapButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' color={'bg-redish'} hoverColor={'bg-redishhover'} />
+                            <MapButton onClickProps={() => setAddingCaughtFish(false)} text='Cancel' color={'bg-negative'} hoverColor={'bg-negativehover'} />
                             :
                             <MapButton onClickProps={() => setAddingCaughtFish(true)} text='Add a Caught Fish' />
                         }
                         <MapButton text='Add a Lure' />
-                        <div className="flex items-center p-4 text-yellowishbone">
+                        <div className="flex items-center p-4 text-secondary">
                             <i className="fa-solid fa-arrow-left-long fa-lg"></i>
                             <p className="ml-2">Actions</p>
                         </div>
                     </div>
 
                     <div className='flex mt-4'>
-                        <div className="flex items-center p-4 text-yellowishbone">
+                        <div className="flex items-center p-4 text-secondary">
                             <p className="mr-2">Filters</p>
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
@@ -86,7 +86,7 @@ export default function MapPage() {
                             <select
                                 onChange={(e) => handleSpeciesChange(e.target.value)}
                                 value={''}
-                                className="w-38 group px-8 py-4 bg-foresty text-yellowishbone font-bold 
+                                className="w-38 group px-8 py-4 bg-foresty text-secondary font-bold 
                                         hover:bg-forestyhover transition-colors 
                                         hover:translate-x-[2px] hover:translate-y-[2px] 
                                         transition-all cursor-pointer
@@ -96,7 +96,7 @@ export default function MapPage() {
                                 <option className="bg-gray-50 text-black" value="">Species</option>
                                 {fishSpecies.map(species => (
                                     filters.fishSpeciesIds?.includes(species.id.toString()) ? (
-                                        <option key={species.id} value={species.id} className="bg-foresty text-yellowishbone cursor-pointer">
+                                        <option key={species.id} value={species.id} className="bg-foresty text-secondary cursor-pointer">
                                             ✓ {species.name}
                                         </option>
                                     ) : (
@@ -112,7 +112,7 @@ export default function MapPage() {
                             <select
                                 onChange={(e) => handleFishingLureChange(e.target.value)}
                                 value={''}
-                                className="w-38 group px-8 py-4 bg-foresty text-yellowishbone font-bold 
+                                className="w-38 group px-8 py-4 bg-foresty text-secondary font-bold 
                                         hover:bg-forestyhover transition-colors 
                                         hover:translate-x-[2px] hover:translate-y-[2px] 
                                         transition-all cursor-pointer
@@ -122,7 +122,7 @@ export default function MapPage() {
                                 <option className="bg-gray-50 text-black" value="">Lures</option>
                                 {fishingLures.map(lure => (
                                     filters.fishingLureIds?.includes(lure.id.toString()) ? (
-                                        <option key={lure.id} value={lure.id} className="bg-foresty text-yellowishbone cursor-pointer">
+                                        <option key={lure.id} value={lure.id} className="bg-foresty text-secondary cursor-pointer">
                                             ✓ {lure.name}
                                         </option>
                                     ) : (
@@ -144,14 +144,14 @@ export default function MapPage() {
                 <div className='flex w-[90%] mx-auto justify-between'>
                     <div className='flex mb-4'>
                         <MapButtonBottom text='Tile Layer' />
-                        <div className="flex items-center p-4 text-yellowishbone">
+                        <div className="flex items-center p-4 text-secondary">
                             <i className="fa-solid fa-arrow-left-long fa-lg"></i>
                             <p className="ml-2">Map Tile Layer</p>
                         </div>
                     </div>
 
                     <div className='flex mb-4'>
-                        <div className="flex items-center p-4 text-yellowishbone">
+                        <div className="flex items-center p-4 text-secondary">
                             <p className="mr-2">Active Filters</p>
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
@@ -165,7 +165,7 @@ export default function MapPage() {
                                 fishingLures={fishingLures}
                             />
                             :
-                            <div className="flex items-center p-4 text-yellowishbone">
+                            <div className="flex items-center p-4 text-secondary">
                                 <p className="mr-2">None Applied</p>
                             </div>
                         }

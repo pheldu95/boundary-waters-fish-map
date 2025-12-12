@@ -18,4 +18,13 @@
   --color-fishbluedarker: rgb(54, 98, 98);
 
   --font-display: "Archivo Black", "sans-serif";
+
+  /* turning colors into easily changable theme */
+  --color-primary: rgb(65 119 119);
+  --color-primarylight: rgb(77, 140, 140);
+  --color-primarydark: rgb(54, 98, 98);
+  --color-negative: rgb(232 24 0);
+  --color-negativehover: rgb(255, 66, 44);
+  --color-secondary: rgb(255 244 158);
+  --color-brownt: rgb(195 165 91);
 }
