@@ -17,33 +17,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Restore auth state on app load
   useEffect(() => {
-    const token = localStorage.getItem('auth-token')
-    if (token) {
-      // Validate token with your API
-      fetch('/api/validate-token', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((response) => response.json())
-        .then((userData) => {
-          if (userData.valid) {
-            setUser(userData.user)
-            setIsAuthenticated(true)
-          } else {
-            localStorage.removeItem('auth-token')
-          }
-        })
-        .catch(() => {
-          localStorage.removeItem('auth-token')
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    } else {
-      setIsLoading(false)
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    try {
+      const response = await axios.get<User>('/api/me');
+      setUser(response.data);
+    } catch (error) {
+      setUser(null);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-  }, [])
+  };
 
   // Show loading state while checking auth
   if (isLoading) {
@@ -83,6 +71,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+      {/* <div>
+        {user?.email}
+      </div> */}
       {children}
     </AuthContext.Provider>
   )

@@ -28,4 +28,19 @@ class SecurityController extends AbstractController
             ]
         );
     }
+
+    #[Route('/api/me', name: 'app_me', methods: ['GET'])]
+    public function me(): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json(['error' => 'Not authenticated'], 401);
+        }
+
+        return $this->json([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+        ]);
+    }
 }
