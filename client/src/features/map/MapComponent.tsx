@@ -5,6 +5,7 @@ import { useCaughtFishes } from '../../lib/hooks/caughtFish/useCaughtFishes';
 import LoadingMapPlaceholder from '../../components/placeholders/LoadingMapPlaceholder';
 import CaughtFishPopup from '../caughtFish/CaughtFishPopup';
 import type { CaughtFishFilters } from '../../lib/types/caughtFishTypes';
+import { useAuth } from '../../AuthContext';
 
 type Props = {
     addingCaughtFish: boolean;
@@ -12,8 +13,8 @@ type Props = {
 }
 
 export default function MapComponent({ addingCaughtFish, filters }: Props) {
-    
-    const { allCaughtFishes } = useCaughtFishes(filters);
+    const { user } = useAuth();
+    const { allCaughtFishes } = useCaughtFishes(filters, user?.id);
 
     if (!allCaughtFishes) return <LoadingMapPlaceholder />;
 
