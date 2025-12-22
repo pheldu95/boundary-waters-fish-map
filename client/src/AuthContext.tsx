@@ -69,15 +69,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     );
 
-    if (response.data.token) {
-      const userData = await response.json() //TODO: get User
-      setUser(userData)
-      setIsAuthenticated(true)
-      // Store token for persistence
-      localStorage.setItem('auth-token', response.data.token)
-    } else {
-      throw new Error('Authentication failed')
-    }
+
+    const userIri = response?.headers['location'];
+    console.log('Login successful:', userIri);
+
   }
 
   const logout = () => {

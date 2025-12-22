@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useAuth } from '../../AuthContext';
 
 interface LoginFormData {
     email: string;
@@ -19,6 +20,7 @@ export default function LoginForm() {
         password: ''
     });
     const [errors, setErrors] = useState<LoginFormErrors>({});
+    const auth = useAuth();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
@@ -38,63 +40,7 @@ export default function LoginForm() {
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-
-        setIsLoading(true);
-        setErrors({});
-
-        try {
-            const response = await axios.post(
-                '/api/login',
-                {
-                    email: formData.email,
-                    password: formData.password
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
-
-            console.log('Login successful:', response.data);
-
-            const userIri = response?.headers['location'];
-
-            // Handle successful login
-            // if (response.data.token) {
-            //     localStorage.setItem('authToken', response.data.token);
-            //     // Redirect or update app state
-            // }
-
-        } catch (error) {
-            console.error('Login error:', error);
-
-            if (axios.isAxiosError(error)) {
-                if (error.response) {
-                    // Server responded with error
-                    const { status, data } = error.response;
-
-                    if (status === 400) {
-                        setErrors({ general: data.detail || 'Invalid request' });
-                    } else if (status === 401) {
-                        setErrors({ general: 'Invalid email or password' });
-                    } else {
-                        setErrors({ general: data.message || 'An error occurred during login' });
-                    }
-                } else if (error.request) {
-                    // Request made but no response
-                    setErrors({ general: 'Network error. Please check your connection.' });
-                } else {
-                    // Error in setting up the request
-                    setErrors({ general: 'An unexpected error occurred' });
-                }
-            } else {
-                setErrors({ general: 'An unexpected error occurred' });
-            }
-        } finally {
-            setIsLoading(false);
-        }
+        auth.login(formData.email, formData.password);
     };
 
     return (
