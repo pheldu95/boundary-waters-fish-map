@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import type { User } from "../types";
 
@@ -10,6 +10,10 @@ export const useUser = (
     const { data: user, isLoading: isLoadingUser } = useQuery({
         queryKey: ['user', iri],
         queryFn: async () => {
+            if(!iri) {
+                 throw new Error('IRI is required');
+            }
+            
             const response = await axios.get<User>(iri)
             return response.data;
         },
