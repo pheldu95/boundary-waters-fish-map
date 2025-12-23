@@ -22,7 +22,7 @@ export default function MapComponent({ addingCaughtFish, filters }: Props) {
             center={[48.0, -91.0]}
             zoom={9}
             scrollWheelZoom={true}
-            style={{ height: "480px", width: "90%" }}
+            style={{ height: "55vh", width: "90%" }}
             className='mx-auto z-1'
         >
             <TileLayer
