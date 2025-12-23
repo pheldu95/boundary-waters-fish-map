@@ -6,7 +6,7 @@ import DefaultButton from '../../components/buttons/DefaultButton';
 import type { Marker } from 'leaflet';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
-import { caughtFishSchema, CaughtFishSchema } from '../../lib/schemas/caughtFishSchema';
+import { caughtFishSchema, type CaughtFishSchema } from '../../lib/schemas/caughtFishSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import DateInput from '../../components/form/DateInput';
 import SelectInput from '../../components/form/SelectInput';
