@@ -11,5 +11,5 @@ export const fishingLureIconColorMap: Record<string, string> = {
 };
 
 export const getFishingLureIconColor = (color: string): string => {
-    return fishingLureIconColorMap[color] || 'text-gray-500';
+    return fishingLureIconColorMap[color] || 'text-black';
 };

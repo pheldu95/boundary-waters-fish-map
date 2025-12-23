@@ -46,7 +46,10 @@ export const useFishingLure = (
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
-                queryKey: ['myFishingLures', 'fishingLures']
+                queryKey: ['myFishingLures']
+            })
+            await queryClient.invalidateQueries({
+                queryKey: ['fishingLures']
             })
         }
     });

@@ -12,6 +12,7 @@ import DateInput from '../../components/form/DateInput';
 import SelectInput from '../../components/form/SelectInput';
 import TextAreaInput from '../../components/form/TexaAreaInput';
 import DefaultInput from '../../components/form/DefaultInput';
+import { useAuth } from '../../AuthContext';
 
 type Props = {
   latitude: number;
@@ -20,9 +21,13 @@ type Props = {
 }
 
 export default function CaughtFishForm({ latitude, longitude, markerRef }: Props) {
+  const { user } = useAuth();
   const { register, reset, handleSubmit, formState: { errors } } = useForm<CaughtFishSchema>({
     mode: 'onTouched',
-    resolver: zodResolver(caughtFishSchema)
+    resolver: zodResolver(caughtFishSchema),
+    defaultValues: {
+      caughtBy: user ? `/api/users/${user.id.toString()}` : '' //seems like a bad way to do this
+    }
   });
   const { id } = useParams();
   const { fishingLures } = useFishingLure();
@@ -119,7 +124,6 @@ export default function CaughtFishForm({ latitude, longitude, markerRef }: Props
 
       <input type="hidden" {...register('latitude', { required: true })} value={latitude} />
       <input type="hidden" {...register('longitude', { required: true })} value={longitude} />
-      <input type="hidden" {...register('caughtBy', { required: true })} value='/api/users/100' /> {/* TODO: Temporary until auth is implemented */}
 
       <DefaultButton text={'Submit'} type='submit' />
     </form>
