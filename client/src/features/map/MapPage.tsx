@@ -51,12 +51,17 @@ export default function MapPage() {
     //     />
     // ];
 
+    //gettin x and y to center the draggable window
+    const centerX = window.innerWidth * 0.05; //5% from left
+    const centerY = window.innerHeight * 0.1; //20% from top
+
     return (
+
         <DraggableWindow
             key={1}
             title={'Fish Map'}
-            initialX={180}
-            initialY={80}
+            initialX={centerX}
+            initialY={centerY}
             width={90}
             onClose={() => console.log('close')}
             constrainToViewport={false}
