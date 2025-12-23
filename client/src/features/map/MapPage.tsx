@@ -10,6 +10,7 @@ import MapActiveFiltersSection from './MapActiveFiltersSection';
 import { useFishingLure } from '../../lib/hooks/useFishingLure';
 import { useAuth } from '../../AuthContext';
 import FishingLureForm from '../fishingLures/FishingLureForm';
+import FormModal from '../../components/modals/FormModal';
 
 export default function MapPage() {
     const { user } = useAuth();
@@ -75,7 +76,11 @@ export default function MapPage() {
 
                 {/* temporary */}
                 {addingFishingLure &&
-                    <FishingLureForm closeForm={() => setAddingFishingLure(false)} />
+                    <FormModal
+                        children={<FishingLureForm closeForm={() => setAddingFishingLure(false)} />}
+                        title='Add a New Lure'
+                        closeForm={() => setAddingFishingLure(false)}
+                    />
                 }
 
                 <div className='flex w-[90%] mx-auto justify-between'>
@@ -91,7 +96,7 @@ export default function MapPage() {
                             :
                             <MapButton onClickProps={() => setAddingFishingLure(true)} text='Add a Lure' />
                         }
-                        
+
                         <div className="flex items-center p-4 text-secondary">
                             <i className="fa-solid fa-arrow-left-long fa-lg"></i>
                             <p className="ml-2">Actions</p>

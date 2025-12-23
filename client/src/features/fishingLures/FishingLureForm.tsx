@@ -10,7 +10,7 @@ type Props = {
     closeForm: () => void
 }
 
-export default function FishingLureForm( { closeForm }: Props) {
+export default function FishingLureForm({ closeForm }: Props) {
     const { user } = useAuth();
     const { createFishingLure } = useFishingLure();
     const { register, reset, handleSubmit, formState: { errors } } = useForm<FishingLureSchema>({
@@ -36,7 +36,7 @@ export default function FishingLureForm( { closeForm }: Props) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 w-[400px] items-center bg-secondary shadow-xl'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2 w-full items-center bg-secondary'>
             <DefaultInput
                 label='Name *'
                 propertyName='name'
