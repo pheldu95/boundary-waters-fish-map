@@ -75,7 +75,7 @@ export default function MapPage() {
 
                 {/* temporary */}
                 {addingFishingLure &&
-                    <FishingLureForm />
+                    <FishingLureForm closeForm={() => setAddingFishingLure(false)} />
                 }
 
                 <div className='flex w-[90%] mx-auto justify-between'>

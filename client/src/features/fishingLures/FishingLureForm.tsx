@@ -6,7 +6,11 @@ import DefaultInput from '../../components/form/DefaultInput';
 import { useAuth } from '../../AuthContext';
 import { useFishingLure } from '../../lib/hooks/useFishingLure';
 
-export default function FishingLureForm() {
+type Props = {
+    closeForm: () => void
+}
+
+export default function FishingLureForm( { closeForm }: Props) {
     const { user } = useAuth();
     const { createFishingLure } = useFishingLure();
     const { register, reset, handleSubmit, formState: { errors } } = useForm<FishingLureSchema>({
@@ -27,6 +31,8 @@ export default function FishingLureForm() {
         } catch (error) {
             console.log(error);
         }
+
+        closeForm();
     }
 
     return (
