@@ -10,6 +10,7 @@ type Props = {
     fishSpecies?: FishSpecies[];
     handleFishingLureChange: (speciesId: string) => void;
     fishingLures?: FishingLure[];
+    length?: number
 }
 
 export default function MapActiveFiltersSection({
@@ -17,7 +18,8 @@ export default function MapActiveFiltersSection({
     handleSpeciesChange,
     fishSpecies,
     handleFishingLureChange,
-    fishingLures
+    fishingLures,
+    length
 }: Props) {
     if (!fishSpecies) return <LoadingSpinner />
 
@@ -28,7 +30,7 @@ export default function MapActiveFiltersSection({
     });
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {/* fish species */}
             <div className="text-secondary">
                 {caughtFishFilters.fishSpeciesIds && <p className="bg-foresty">Species</p>}
@@ -79,6 +81,14 @@ export default function MapActiveFiltersSection({
                             );
                         })
                     }
+                </div>
+            </div>
+
+            {/* length greater or equal to filter */}
+            <div className="text-secondary">
+                {length > 0 && <p className="bg-foresty">Length Greater Than or Equal to</p>}
+                <div className="items-center rounded-b-lg bg-foresty shadow-md">
+                    {length}
                 </div>
             </div>
         </div>

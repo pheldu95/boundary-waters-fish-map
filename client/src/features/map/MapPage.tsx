@@ -201,7 +201,7 @@ export default function MapPage() {
                             <p className="mr-2">Active Filters</p>
                             <i className="fa-solid fa-arrow-right-long fa-lg"></i>
                         </div>
-                        {filters.fishSpeciesIds || filters.fishingLureIds ?
+                        {filters.fishSpeciesIds || filters.fishingLureIds || filters.length ?
                             <MapActiveFiltersSection
                                 caughtFishFilters={filters}
                                 handleSpeciesChange={handleSpeciesChange}
@@ -209,6 +209,8 @@ export default function MapPage() {
 
                                 handleFishingLureChange={handleFishingLureChange}
                                 fishingLures={myFishingLures}
+
+                                length={filters.length}
                             />
                             :
                             <div className="flex items-center p-4 text-secondary">
