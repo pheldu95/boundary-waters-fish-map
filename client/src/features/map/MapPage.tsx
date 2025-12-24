@@ -11,6 +11,7 @@ import { useFishingLure } from '../../lib/hooks/useFishingLure';
 import { useAuth } from '../../AuthContext';
 import FishingLureForm from '../fishingLures/FishingLureForm';
 import FormModal from '../../components/modals/FormModal';
+import LengthFilter from './LengthFilter';
 
 export default function MapPage() {
     const { user } = useAuth();
@@ -22,7 +23,8 @@ export default function MapPage() {
     const [selectingLength, setSelectingLength] = useState(false);
     const [filters, setFilters] = useState<CaughtFishFilters>({
         fishSpeciesIds: undefined,
-        fishingLureIds: undefined
+        fishingLureIds: undefined,
+        length: undefined
     });
 
     const handleSpeciesChange = (speciesId: string) => {
@@ -41,6 +43,14 @@ export default function MapPage() {
                 ? prev.fishingLureIds.filter(id => id !== fishingLureId) //remove if already selected
                 : [...(prev.fishingLureIds || []), fishingLureId] //add if not selected
         }));
+    }
+
+    const handleLengthFilterSubmit = (length: number) => {
+        setFilters(prev => ({
+            ...prev,
+            length: length
+        }));
+        setSelectingLength(false);
     }
 
     // const tileLayerOptions = [
@@ -164,7 +174,10 @@ export default function MapPage() {
                         }
 
                         {selectingLength ?
-                            <MapButton onClickProps={() => setSelectingLength(false)} text='Cancel' color={'bg-negative'} hoverColor={'bg-negativehover'} />
+                            <div>
+                                <MapButton onClickProps={() => setSelectingLength(false)} text='Cancel' color={'bg-negative'} hoverColor={'bg-negativehover'} />
+                                <FormModal title='Length Greater Than' children={<LengthFilter handleLengthFilterSubmit={handleLengthFilterSubmit} />} closeForm={() => setSelectingLength(false)} />
+                            </div>
                             :
                             <MapButton text='Length' onClickProps={() => setSelectingLength(true)} />
                         }
