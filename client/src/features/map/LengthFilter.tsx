@@ -6,14 +6,13 @@ type Props = {
 }
 
 export default function LengthFilter({ handleLengthFilterSubmit }: Props) {
-    const [lengthValue, setLengthValue] = useState();
+    const [lengthValue, setLengthValue] = useState<number>(0);
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setLengthValue(event.target.value);
+        setLengthValue(Number(event.target.value));
     }
 
     return (
         <div>
-            <div>{lengthValue}</div>
             <input 
                 type='number'
                 value={lengthValue}
