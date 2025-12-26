@@ -52,6 +52,12 @@ export default function MapPage() {
         }));
         setSelectingLength(false);
     }
+    const removeLengthFilter = () => {
+        setFilters(prev => ({
+            ...prev,
+            length: undefined
+        }));
+    }
 
     // const tileLayerOptions = [
     //     <TileLayer
@@ -176,7 +182,7 @@ export default function MapPage() {
                         {selectingLength ?
                             <div>
                                 <MapButton onClickProps={() => setSelectingLength(false)} text='Cancel' color={'bg-negative'} hoverColor={'bg-negativehover'} />
-                                <FormModal title='Length Greater Than' children={<LengthFilter handleLengthFilterSubmit={handleLengthFilterSubmit} />} closeForm={() => setSelectingLength(false)} />
+                                <FormModal title='Length &ge;' children={<LengthFilter handleLengthFilterSubmit={handleLengthFilterSubmit} />} closeForm={() => setSelectingLength(false)} />
                             </div>
                             :
                             <MapButton text='Length' onClickProps={() => setSelectingLength(true)} />
@@ -210,6 +216,7 @@ export default function MapPage() {
                                 handleFishingLureChange={handleFishingLureChange}
                                 fishingLures={myFishingLures}
 
+                                removeLengthFilter={removeLengthFilter}
                                 length={filters.length}
                             />
                             :

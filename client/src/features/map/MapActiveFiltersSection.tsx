@@ -10,7 +10,8 @@ type Props = {
     fishSpecies?: FishSpecies[];
     handleFishingLureChange: (speciesId: string) => void;
     fishingLures?: FishingLure[];
-    length?: number
+    length?: number;
+    removeLengthFilter: () => void;
 }
 
 export default function MapActiveFiltersSection({
@@ -19,7 +20,8 @@ export default function MapActiveFiltersSection({
     fishSpecies,
     handleFishingLureChange,
     fishingLures,
-    length
+    length,
+    removeLengthFilter
 }: Props) {
     if (!fishSpecies) return <LoadingSpinner />
 
@@ -86,10 +88,27 @@ export default function MapActiveFiltersSection({
 
             {/* length greater or equal to filter */}
             <div className="text-secondary">
-                {length > 0 && <p className="bg-foresty">Length Greater Than or Equal to</p>}
-                <div className="items-center rounded-b-lg bg-foresty shadow-md">
-                    {length}
-                </div>
+                {length && length > 0 &&
+                    <button
+                        className="
+                group px-8 py-4 bg-foresty text-secondary font-bold 
+                hover:bg-negativehover transition-colors 
+                hover:translate-x-[2px] hover:translate-y-[2px] 
+                transition-all cursor-pointer
+                rounded-b-lg
+                shadow-md
+            "
+                        onClick={removeLengthFilter}
+                        type={'button'}
+                    >
+                        <span className="group-hover:hidden inline-block transition-all duration-300">
+                            Length &ge; {length}
+                        </span>
+                        <span className="hidden group-hover:inline-block transition-all duration-300">
+                            Remove filter
+                        </span>
+                    </button>
+                }
             </div>
         </div>
     )
