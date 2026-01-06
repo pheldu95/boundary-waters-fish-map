@@ -13,6 +13,7 @@ import FishingLureForm from '../fishingLures/FishingLureForm';
 import FormModal from '../../components/modals/FormModal';
 import LengthFilter from './LengthFilter';
 import { TileLayer } from 'react-leaflet';
+import { tileLayerOptions } from '../../utils/tileLayerOptions';
 
 export default function MapPage() {
     const { user } = useAuth();
@@ -67,6 +68,13 @@ export default function MapPage() {
             ...prev,
             length: undefined
         }));
+    }
+
+    const handleTileLayerChange = (name: string) => {
+        const layer = tileLayerOptions.find(layerOption => layerOption.name === name);
+        if (layer) {
+            setTileLayer(layer);
+        }
     }
 
     //gettin x and y to center the draggable window
@@ -186,15 +194,32 @@ export default function MapPage() {
 
                 </div>
                 <div className={addingCaughtFish ? 'map-container-add-fish' : ''}>
-                    <MapComponent 
-                        addingCaughtFish={addingCaughtFish} 
-                        filters={filters} 
+                    <MapComponent
+                        addingCaughtFish={addingCaughtFish}
+                        filters={filters}
                         tileLayerComponent={tileLayer.component}
                     />
                 </div>
                 <div className='flex w-[90%] mx-auto justify-between'>
                     <div className='flex mb-4'>
-                        <MapButtonBottom text='Tile Layer' />
+                        <select
+                            onChange={(e) => handleTileLayerChange(e.target.value)}
+                            value={''}
+                            className="w-44 group px-8 py-4 bg-foresty text-secondary font-bold 
+                                        hover:bg-forestyhover transition-colors 
+                                        hover:translate-x-[2px] hover:translate-y-[2px] 
+                                        transition-all cursor-pointer
+                                        rounded-b-lg focus:outline-none
+                                        shadow-md"
+                        >
+                            <option className="bg-gray-50 text-black" value="">Tile Layer</option>
+                            {tileLayerOptions.map(layer => (
+                                <option key={layer.name} value={layer.name} className="bg-gray-50 text-black cursor-pointer">
+                                    {layer.name}
+                                </option>
+                            ))}
+                        </select>
+
                         <div className="flex items-center p-4 text-secondary">
                             <i className="fa-solid fa-arrow-left-long fa-lg"></i>
                             <p className="ml-2">Map Tile Layer</p>
