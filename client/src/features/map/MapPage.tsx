@@ -214,9 +214,15 @@ export default function MapPage() {
                         >
                             <option className="bg-gray-50 text-black" value="">Tile Layer</option>
                             {tileLayerOptions.map(layer => (
-                                <option key={layer.name} value={layer.name} className="bg-gray-50 text-black cursor-pointer">
-                                    {layer.name}
-                                </option>
+                                tileLayer.name === layer.name ? (
+                                    <option key={layer.name} value={layer.name} className="bg-foresty text-black cursor-pointer">
+                                        ✓ {layer.name}
+                                    </option>
+                                ) : (
+                                    <option key={layer.name} value={layer.name} className="bg-gray-50 text-black cursor-pointer">
+                                        {layer.name}
+                                    </option>
+                                )
                             ))}
                         </select>
 

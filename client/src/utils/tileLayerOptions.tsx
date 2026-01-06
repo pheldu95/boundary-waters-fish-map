@@ -8,7 +8,7 @@ export const tileLayerOptions = [
                 maxNativeZoom={ 17} // This tile layer goes up to zoom level 16
                 maxZoom={ 30} // Allow zooming in further. Makes map blurry though
         />,
-        name: 'Default'
+        name: 'Default (Open Topo)'
     },
     {
         component: <TileLayer
@@ -18,5 +18,14 @@ export const tileLayerOptions = [
                 maxZoom={ 30} // Allow zooming in further. Makes map blurry though
         />,
         name: 'U.S. Geological Survey'
-    }
+    },
+    {
+        component: <TileLayer
+                attribution='Tiles © Esri'
+                url = "https://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer/tile/{z}/{y}/{x}"
+                maxNativeZoom={ 16} // This tile layer goes up to zoom level 16
+                maxZoom={ 30} // Allow zooming in further. Makes map blurry though
+        />,
+        name: 'Esri Topo'
+    },
 ];
