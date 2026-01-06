@@ -6,13 +6,15 @@ import LoadingMapPlaceholder from '../../components/placeholders/LoadingMapPlace
 import CaughtFishPopup from '../caughtFish/CaughtFishPopup';
 import type { CaughtFishFilters } from '../../lib/types/caughtFishTypes';
 import { useAuth } from '../../AuthContext';
+import type { JSX } from 'react';
 
 type Props = {
     addingCaughtFish: boolean;
-    filters?: CaughtFishFilters
+    filters?: CaughtFishFilters;
+    tileLayerComponent: JSX.Element
 }
 
-export default function MapComponent({ addingCaughtFish, filters }: Props) {
+export default function MapComponent({ addingCaughtFish, filters, tileLayerComponent }: Props) {
     const { user } = useAuth();
     const { allCaughtFishes } = useCaughtFishes(filters, user?.id);
 
@@ -26,12 +28,7 @@ export default function MapComponent({ addingCaughtFish, filters }: Props) {
             style={{ height: "55vh", width: "90%" }}
             className='mx-auto z-1'
         >
-            <TileLayer
-                attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
-                url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-                maxNativeZoom={17} // This tile layer goes up to zoom level 16
-                maxZoom={30} // Allow zooming in further. Makes map blurry though
-            />
+            {tileLayerComponent}
             <MarkerClusterGroup
                 chunkedLoading
                 // disableClusteringAtZoom={1}
