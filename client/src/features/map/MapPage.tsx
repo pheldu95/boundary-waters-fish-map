@@ -12,6 +12,8 @@ import { useAuth } from '../../AuthContext';
 import FishingLureForm from '../fishingLures/FishingLureForm';
 import FormModal from '../../components/modals/FormModal';
 import LengthFilter from './LengthFilter';
+import { TileLayer } from 'react-leaflet';
+import { tileLayerOptions } from '../../utils/tileLayerOptions';
 
 export default function MapPage() {
     const { user } = useAuth();
@@ -21,6 +23,15 @@ export default function MapPage() {
     const [addingCaughtFish, setAddingCaughtFish] = useState(false);
     const [addingFishingLure, setAddingFishingLure] = useState(false);
     const [selectingLength, setSelectingLength] = useState(false);
+    const [tileLayer, setTileLayer] = useState({
+        component: <TileLayer
+            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            maxNativeZoom={17} // This tile layer goes up to zoom level 16
+            maxZoom={30} // Allow zooming in further. Makes map blurry though
+        />,
+        name: 'Default'
+    });
     const [filters, setFilters] = useState<CaughtFishFilters>({
         fishSpeciesIds: undefined,
         fishingLureIds: undefined,
@@ -59,20 +70,12 @@ export default function MapPage() {
         }));
     }
 
-    // const tileLayerOptions = [
-    //     <TileLayer
-    //         attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
-    //         url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-    //         maxNativeZoom={17} // This tile layer goes up to zoom level 16
-    //         maxZoom={20} // Allow zooming in further. Makes map blurry though
-    //     />,
-    //     <TileLayer
-    //         attribution='Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
-    //         url="https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"
-    //         maxNativeZoom={16} // This tile layer goes up to zoom level 16
-    //         maxZoom={20} // Allow zooming in further. Makes map blurry though
-    //     />
-    // ];
+    const handleTileLayerChange = (name: string) => {
+        const layer = tileLayerOptions.find(layerOption => layerOption.name === name);
+        if (layer) {
+            setTileLayer(layer);
+        }
+    }
 
     //gettin x and y to center the draggable window
     const centerX = window.innerWidth * 0.05; //5% from left
@@ -191,11 +194,38 @@ export default function MapPage() {
 
                 </div>
                 <div className={addingCaughtFish ? 'map-container-add-fish' : ''}>
-                    <MapComponent addingCaughtFish={addingCaughtFish} filters={filters} />
+                    <MapComponent
+                        addingCaughtFish={addingCaughtFish}
+                        filters={filters}
+                        tileLayerComponent={tileLayer.component}
+                    />
                 </div>
                 <div className='flex w-[90%] mx-auto justify-between'>
                     <div className='flex mb-4'>
-                        <MapButtonBottom text='Tile Layer' />
+                        <select
+                            onChange={(e) => handleTileLayerChange(e.target.value)}
+                            value={''}
+                            className="w-44 group px-8 py-4 bg-foresty text-secondary font-bold 
+                                        hover:bg-forestyhover transition-colors 
+                                        hover:translate-x-[2px] hover:translate-y-[2px] 
+                                        transition-all cursor-pointer
+                                        rounded-b-lg focus:outline-none
+                                        shadow-md"
+                        >
+                            <option className="bg-gray-50 text-black" value="">Tile Layer</option>
+                            {tileLayerOptions.map(layer => (
+                                tileLayer.name === layer.name ? (
+                                    <option key={layer.name} value={layer.name} className="bg-foresty text-black cursor-pointer">
+                                        ✓ {layer.name}
+                                    </option>
+                                ) : (
+                                    <option key={layer.name} value={layer.name} className="bg-gray-50 text-black cursor-pointer">
+                                        {layer.name}
+                                    </option>
+                                )
+                            ))}
+                        </select>
+
                         <div className="flex items-center p-4 text-secondary">
                             <i className="fa-solid fa-arrow-left-long fa-lg"></i>
                             <p className="ml-2">Map Tile Layer</p>
